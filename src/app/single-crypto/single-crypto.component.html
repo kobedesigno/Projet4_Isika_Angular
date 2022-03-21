@@ -1,0 +1,13 @@
+<div class="crypto-name" *ngIf="!loading && cryptos.length  > 0">
+  <div class="crypto-name-item" *ngFor="let crypto of cryptos">
+    <div class="crypto-container" *ngIf="!loading">
+      <img [src]="crypto?.imageUrl" alt="">
+      <div class="crypto-info">
+        <h1 class="crypto-name">{{ crypto?.cryptoName }}</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="crypto-container" *ngIf="!loading">
+  <button mat-raised-button (click)="onBack()">BACK</button>
+</div>

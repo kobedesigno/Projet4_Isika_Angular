@@ -1,0 +1,32 @@
+<p *ngIf="!loading && cryptos.length <= 0">
+  No cryptos to display!
+</p>
+<p class="list-title" *ngIf="!loading && cryptos.length > 0">THE CRYPTOS</p>
+<div class="crypto-list" *ngIf="!loading && cryptos.length  > 0">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Crypto</th>
+            <th>Prix</th>
+            <th>Total Vol</th>
+            <th>Top Tier Vol</th>
+            <th>Last 7 Days</th>
+            <th>Change</th>
+          </tr>
+        </thead>
+        <tbody class="crypto-list-item" *ngFor="let crypto of cryptos" (click)="onClickCrypto(crypto.cryptoName)">
+          <tr>
+            <td><img [src]="crypto.imageUrl"></td>
+            <td>{{ crypto.cryptoName | uppercase }}</td>
+            <td>{{ crypto.price | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
+            <td>{{ crypto.totalVolume24H | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
+            <td>{{ crypto.totalToptierVolume24H | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
+            <td></td>
+            <td>{{ crypto.changeHour | percent}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>

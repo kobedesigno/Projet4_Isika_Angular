@@ -1,0 +1,17 @@
+.crypto-container {
+  display: flex;
+  img {
+    max-height: 70vh;
+    flex: 1;
+  }
+}
+
+.crypto-info {
+  padding: 40px 20px;
+  flex: 1;
+}
+
+
+.crypto-name {
+  margin: 0;
+}

@@ -1,0 +1,60 @@
+<nav>
+    <div class="left-nav">
+      <ul>
+        <li>
+          <a routerLink="cryptos" routerLinkActive="active">
+            Cryptos
+          </a>
+        </li>
+        <li>
+          <a routerLink="invest" routerLinkActive="active" ><!-- *ngIf="isAuth" -->
+            Investir
+          </a>
+        </li>
+        <!-- <li class="nav-item" *ngIf="showAdminBoard">
+          <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+        </li>
+        <li class="nav-item" *ngIf="showModeratorBoard">
+          <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
+        </li>
+        <li class="nav-item">
+          <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+        </li> -->
+      </ul>
+    </div>
+    <div class="logo">
+      <div class="logo-text">
+        <h1>
+          Crypto App
+        </h1>
+        <h5>
+          Le meilleur simulateur d'achat de cryptos
+        </h5>
+      </div>
+    </div>
+    <div class="right-nav">
+      <ul>
+        <li>
+        <a routerLink="register" routerLinkActive="active" *ngIf="!isLoggedIn">  <!--  *ngIf="!isAuth" -->
+            Inscription
+          </a>
+        </li>
+        <li>
+          <a routerLink="login" routerLinkActive="active" *ngIf="!isLoggedIn"><!--  *ngIf="!isAuth" -->
+            Connexion
+          </a>
+        </li>
+        <li>
+          <a (click)="logout()" *ngIf="isLoggedIn"><!--  *ngIf="isAuth" -->
+            Déconnexion
+          </a>
+        </li>
+        <li>
+          <a routerLink="profile" routerLinkActive="active" *ngIf="isLoggedIn"><!-- *ngIf="isAuth" -->
+            Profil
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
