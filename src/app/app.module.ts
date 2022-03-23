@@ -4,36 +4,26 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CryptoFormComponent } from './crypto-form/crypto-form.component';
 import { CryptoListComponent } from './crypto-list/crypto-list.component';
 import { HeaderComponent } from './header/header.component';
-import { SingleCryptoComponent } from './single-crypto/single-crypto.component';
+import { CryptoSingleComponent } from './crypto-single/crypto-single.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
-import { BoardUserComponent } from './board-user/board-user.component';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+import { UserProfilComponent } from './user-profile/user-profil.component';
+import { RegisterComponent } from './auth/register/register.component';
 
-import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { AuthInterceptor } from './_interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // SignupComponent,
-    // LoginComponent,
-    CryptoFormComponent,
     CryptoListComponent,
     HeaderComponent,
-    SingleCryptoComponent,
-    BoardAdminComponent,
-    BoardModeratorComponent,
-    BoardUserComponent,
+    CryptoSingleComponent,
     LoginComponent,
-    ProfileComponent,
+    UserProfilComponent,
     RegisterComponent
   ],
   imports: [
@@ -46,7 +36,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     // MatProgressSpinnerModule,
     // MatButtonModule
   ],
-  providers: [authInterceptorProviders],//{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

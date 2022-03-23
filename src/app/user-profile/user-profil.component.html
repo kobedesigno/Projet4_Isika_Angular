@@ -1,0 +1,72 @@
+<div class="user-container" *ngIf="!loading">
+  <div class="user-info">
+    <h2>Investissement de {{ user.userName }}</h2>
+    <div *ngIf="user.montantDepose !== 0; else elseBlock">
+      <h3>Montant Total de l'investissement: {{ user.montantDepose | currency: 'EUR' : 'symbol' : '1.2-2'}}</h3>
+      <div>
+        <ul>
+          <p>Vous possèdez actuellement :</p>
+          <li *ngIf="user.btc !== 0">{{ user.btc }} Bitcoin</li>
+          <li *ngIf="user.eth !== 0">{{ user.eth }} Etherum</li>
+          <li *ngIf="user.bnb !== 0">{{ user.bnb }} Binance Coin</li>
+          <li *ngIf="user.ltc !== 0">{{ user.ltc }} Litecoin</li>
+          <li *ngIf="user.eos !== 0">{{ user.eos }} Eos</li>
+          <li *ngIf="user.bch !== 0">{{ user.bch }} Bitcoin Cash</li>
+          <li *ngIf="user.trx !== 0">{{ user.trx }} Tron</li>
+          <li *ngIf="user.neo !== 0">{{ user.neo }} Neo Etherum chinois</li>
+          <li *ngIf="user.ada !== 0">{{ user.ada }} Cardano</li>
+          <li *ngIf="user.xrp !== 0">Vous possèdez : {{ user.xrp | currency: 'EUR' : 'symbol' : '1.2-2'}} XRP</li>
+        </ul>
+      </div>  
+    </div>
+    <ng-template #elseBlock>
+      <p>Vous n'avez fait aucun investissement pour le moment</p>
+    </ng-template>
+    <br>
+    <div class="table-responsive">
+      <h3>Voici le prix des cryptos actuellement : </h3>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>Crypto</th>
+            <th>Prix</th>
+          </tr>
+        </thead>
+        <tbody class="crypto-list-item" *ngFor="let crypto of cryptos" (click)="onClickCrypto(crypto.cryptoName)">
+          <tr>
+            <td>{{ crypto.cryptoName | uppercase }}</td>
+            <td>{{ crypto.price | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="control-buttons">
+      <button mat-raised-button (click)="onBack()">BACK</button>
+      <button mat-raised-button color="primary" (click)="onInvest()" *ngIf="userId === user.id">Inversir dans une crypto</button>
+      <!-- <button mat-raised-button color="warn" (click)="onDelete()" *ngIf="userId === user._id">DELETE</button> -->
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container" *ngIf="currentUser; else loggedOut">
+    <header class="jumbotron">
+      <h3>
+        <strong>{{ currentUser.username }}</strong> Profile
+      </h3>
+    </header>
+    <p>
+      <strong>Token:</strong>
+      {{ currentUser.accessToken.substring(0, 20) }} ...
+      {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}
+    </p>
+    <p>
+      <strong>Email:</strong>
+      {{ currentUser.email }}
+    </p>
+  </div>
+  
+  <ng-template #loggedOut>
+    Please login.
+  </ng-template>
+   -->

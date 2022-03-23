@@ -37,4 +37,15 @@ export class CryptosService {
       }
     );
   }
+  getCryptosByNameDate(cryptoName: string, cryptoDate: Date) {
+    this.http.get('https://isikaprojet4-cryptoapp-n-s.herokuapp.com/api/cryptos/dateName/'+ cryptoDate +'/' + cryptoName).subscribe(
+      (cryptos: Crypto[]) => {
+        this.cryptos$.next(cryptos);
+      },
+      (error) => {
+        this.cryptos$.next([]);
+        console.error(error);
+      }
+    );
+  }
 }

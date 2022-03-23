@@ -1,33 +1,60 @@
-import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from '../_services/token-storage.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../_services/auth.service';
+// import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
-  isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
-  username?: string;
+  isAuth: boolean;
+  authSubscription: Subscription;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(private auth: AuthService) { }
 
-  ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-
-      this.username = user.username;
-    }
+  ngOnInit() {
+    this.authSubscription = this.auth.isAuth$.subscribe(
+      (auth) => {
+        this.isAuth = auth;
+      }
+    );
   }
 
-  logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
+  onLogout() {
+    this.auth.logout();
+  }
+
+  ngOnDestroy() {
+    this.authSubscription.unsubscribe();
   }
 
 }
+
+// export class HeaderComponent implements OnInit {
+
+//   isLoggedIn = false;
+//   showAdminBoard = false;
+//   showModeratorBoard = false;
+//   username?: string;
+
+//   constructor(private tokenStorageService: TokenStorageService) { }
+
+//   ngOnInit(): void {
+//     this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+//     if (this.isLoggedIn) {
+//       const user = this.tokenStorageService.getUser();
+
+//       this.username = user.username;
+//     }
+//   }
+
+//   logout(): void {
+//     this.tokenStorageService.signOut();
+//     window.location.reload();
+//   }
+
+// }
