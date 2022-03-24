@@ -1,1 +1,59 @@
-<p>invest-form works!</p>
+<form [formGroup]="userForm" *ngIf="!loading">
+  <!-- <div class="form-group">
+    <label for="BTC">Bitcoin</label>
+    <select name="pets" id="pet-select">
+        <option value="">--Please choose an option--</option>
+        <option value="BTC">Bitcoin</option>
+        <option value="ETH">Etherum</option>
+        <option value="BNB">Binance Coin</option>
+        <option value="LTC">Litecoin</option>
+        <option value="EOS">EOS</option>
+        <option value="BCH">Bitcoin Cash</option>
+        <option value="TRX">Tron</option>
+        <option value="NEO">Neo Etherum Chinois</option>
+        <option value="ADA">Cardano</option>
+        <option value="XRP">XRP</option>
+    </select>
+  </div> -->
+  <div class="form-group">
+    <label for="BTC">Bitcoin</label>
+    <input type="text" class="form-control" id="BTC" formControlName="BTC">
+  </div>
+  <div class="form-group">
+    <label for="ETH">Etherum</label>
+    <input type="text" class="form-control" id="ETH" formControlName="ETH">
+  </div>
+  <div class="form-group">
+    <label for="BNB">Binance Coin</label>
+    <textarea class="form-control" id="BNB" rows="5" formControlName="BNB"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="LTC">Litecoin</label>
+    <textarea class="form-control" id="LTC" rows="5" formControlName="LTC"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="EOS">EOS</label>
+    <textarea class="form-control" id="EOS" rows="5" formControlName="EOS"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="BCH">Bitcoin Cash</label>
+    <textarea class="form-control" id="BCH" rows="5" formControlName="BCH"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="TRX">Tron</label>
+    <textarea class="form-control" id="TRX" rows="5" formControlName="TRX"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="NEO">Neo Etherum Chinois</label>
+    <textarea class="form-control" id="NEO" rows="5" formControlName="NEO"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="ADA">Cardano</label>
+    <textarea class="form-control" id="ADA" rows="5" formControlName="ADA"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="XRP">XRP</label>
+    <textarea class="form-control" id="XRP" rows="5" formControlName="XRP"></textarea>
+  </div>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="userForm.invalid">SUBMIT</button>
+</form>

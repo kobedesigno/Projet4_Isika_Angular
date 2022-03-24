@@ -11,7 +11,7 @@ const API_URL = 'https://isikaprojet4-cryptoapp-s-s.herokuapp.com/api/auth/user/
 export class UsersService {
   constructor(private http: HttpClient) { }
 
-  updateInvest(id: number) {
+  updateUserInvest(id: number, user: User) {
     return new Promise((resolve, reject) => {
       this.http.get(API_URL + id).subscribe(
         (user: User) => {

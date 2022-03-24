@@ -68,7 +68,7 @@ export class UserProfilComponent implements OnInit {
   }
 
   onInvest() {
-    this.router.navigate(['/user-invest', this.user.id]);
+    this.router.navigate(['/user-invest']);
   }
 
   // onDelete() {
