@@ -6,6 +6,7 @@ import { UserInvestComponent } from './user-invest/user-invest.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { UserProfilComponent } from './user-profile/user-profil.component';
+import { UserSellComponent } from './user-sell/user-sell.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
     //   { path: 'calculatrice/:mode', component: BchComponent },
     // ],
   },
+  { path: 'sell', component: UserSellComponent},
   { path: 'crypto/:cryptoName', component: CryptoSingleComponent},
   { path: '', pathMatch: 'full', redirectTo: 'cryptos'},
   { path: '**', redirectTo: 'crytpos' }

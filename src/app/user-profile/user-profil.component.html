@@ -3,20 +3,20 @@
     <h2>Investissement de {{ user.userName }}</h2>
     <div *ngIf="user.montantDepose !== 0; else elseBlock">
       <h3>Montant Total de l'investissement: {{ user.montantDepose | currency: 'EUR' : 'symbol' : '1.2-2'}}</h3>
-      <h3>Montant Total de l'argent récupérer : 0</h3>
+      <h3>Montant Total de l'argent possédé : {{ montantTotalPossede }}</h3>
       <div>
+        <p>Vous possèdez actuellement :</p>
         <ul>
-          <p>Vous possèdez actuellement :</p>
-          <li *ngIf="user.btc !== 0">{{ user.btc }} Bitcoin</li>
-          <li *ngIf="user.eth !== 0">{{ user.eth }} Etherum</li>
-          <li *ngIf="user.bnb !== 0">{{ user.bnb }} Binance Coin</li>
-          <li *ngIf="user.ltc !== 0">{{ user.ltc }} Litecoin</li>
-          <li *ngIf="user.eos !== 0">{{ user.eos }} Eos</li>
-          <li *ngIf="user.bch !== 0">{{ user.bch }} Bitcoin Cash</li>
-          <li *ngIf="user.trx !== 0">{{ user.trx }} Tron</li>
-          <li *ngIf="user.neo !== 0">{{ user.neo }} Neo Etherum chinois</li>
-          <li *ngIf="user.ada !== 0">{{ user.ada }} Cardano</li>
-          <li *ngIf="user.xrp !== 0">Vous possèdez : {{ user.xrp | currency: 'EUR' : 'symbol' : '1.2-2'}} xrp</li>
+          <li *ngIf="user.btc !== 0">{{ user.btc }} Bitcoin soit {{ BTCUserHadEuro }} euros</li>
+          <li *ngIf="user.eth !== 0">{{ user.eth }} Etherum soit {{ ETHUserHadEuro }} euros</li>
+          <li *ngIf="user.bnb !== 0">{{ user.bnb }} Binance Coin soit {{ BNBUserHadEuro }} euros</li>
+          <li *ngIf="user.ltc !== 0">{{ user.ltc }} Litecoin soit {{ LTCUserHadEuro }} euros</li>
+          <li *ngIf="user.eos !== 0">{{ user.eos }} Eos soit {{ EOSUserHadEuro }} euros</li>
+          <li *ngIf="user.bch !== 0">{{ user.bch }} Bitcoin Cash soit {{ BCHUserHadEuro }} euros</li>
+          <li *ngIf="user.trx !== 0">{{ user.trx }} Tron soit {{ TRXUserHadEuro }} euros</li>
+          <li *ngIf="user.neo !== 0">{{ user.neo }} Neo Etherum chinois soit {{ NEOUserHadEuro }} euros</li>
+          <li *ngIf="user.ada !== 0">{{ user.ada }} Cardano soit {{ ADAUserHadEuro }} euros</li>
+          <li *ngIf="user.xrp !== 0">{{ user.xrp }} xrp soit {{ XRPUserHadEuro }} euros</li>
         </ul>
       </div>  
     </div>
@@ -44,7 +44,8 @@
 
     <div class="control-buttons">
       <button mat-raised-button (click)="onBack()">BACK</button>
-      <button mat-raised-button color="primary" (click)="onInvest()" *ngIf="userId === user.id">Inversir dans une crypto</button>
+      <button mat-raised-button color="primary" (click)="onInvest()" *ngIf="userId === user.id">Investir</button>
+      <button mat-raised-button color="primary" (click)="onSell()" *ngIf="userId === user.id">Vendre</button>
       <!-- <button mat-raised-button color="warn" (click)="onDelete()" *ngIf="userId === user._id">DELETE</button> -->
     </div>
   </div>

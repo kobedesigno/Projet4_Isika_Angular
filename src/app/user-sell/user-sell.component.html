@@ -1,21 +1,21 @@
 <div *ngIf="user.montantDepose !== 0; else elseBlock">
     <h3>Montant Total de l'investissement: {{ user.montantDepose | currency: 'EUR' : 'symbol' : '1.2-2'}}</h3>
-    <h3>Montant Total de l'argent possédé : {{ montantTotalPossede | currency: 'EUR' : 'symbol' : '1.2-2'}}</h3>
+    <h3>Montant Total de l'argent possédé : {{ montantTotalPossede }}</h3>
     <div>
-      <p>Vous possèdez actuellement :</p>
-      <ul>
-        <li *ngIf="user.btc !== 0">{{ user.btc }} Bitcoin soit {{ BTCUserHadEuro }} euros</li>
-        <li *ngIf="user.eth !== 0">{{ user.eth }} Etherum soit {{ ETHUserHadEuro }} euros</li>
-        <li *ngIf="user.bnb !== 0">{{ user.bnb }} Binance Coin soit {{ BNBUserHadEuro }} euros</li>
-        <li *ngIf="user.ltc !== 0">{{ user.ltc }} Litecoin soit {{ LTCUserHadEuro }} euros</li>
-        <li *ngIf="user.eos !== 0">{{ user.eos }} Eos soit {{ EOSUserHadEuro }} euros</li>
-        <li *ngIf="user.bch !== 0">{{ user.bch }} Bitcoin Cash soit {{ BCHUserHadEuro }} euros</li>
-        <li *ngIf="user.trx !== 0">{{ user.trx }} Tron soit {{ TRXUserHadEuro }} euros</li>
-        <li *ngIf="user.neo !== 0">{{ user.neo }} Neo Etherum chinois soit {{ NEOUserHadEuro }} euros</li>
-        <li *ngIf="user.ada !== 0">{{ user.ada }} Cardano soit {{ ADAUserHadEuro }} euros</li>
-        <li *ngIf="user.xrp !== 0">{{ user.xrp }} xrp soit {{ XRPUserHadEuro }} euros</li>
-      </ul>
-    </div>   
+        <p>Vous possèdez actuellement :</p>
+        <ul>
+          <li *ngIf="user.btc !== 0">{{ user.btc }} Bitcoin soit {{ BTCUserHadEuro }} euros</li>
+          <li *ngIf="user.eth !== 0">{{ user.eth }} Etherum soit {{ ETHUserHadEuro }} euros</li>
+          <li *ngIf="user.bnb !== 0">{{ user.bnb }} Binance Coin soit {{ BNBUserHadEuro }} euros</li>
+          <li *ngIf="user.ltc !== 0">{{ user.ltc }} Litecoin soit {{ LTCUserHadEuro }} euros</li>
+          <li *ngIf="user.eos !== 0">{{ user.eos }} Eos soit {{ EOSUserHadEuro }} euros</li>
+          <li *ngIf="user.bch !== 0">{{ user.bch }} Bitcoin Cash soit {{ BCHUserHadEuro }} euros</li>
+          <li *ngIf="user.trx !== 0">{{ user.trx }} Tron soit {{ TRXUserHadEuro }} euros</li>
+          <li *ngIf="user.neo !== 0">{{ user.neo }} Neo Etherum chinois soit {{ NEOUserHadEuro }} euros</li>
+          <li *ngIf="user.ada !== 0">{{ user.ada }} Cardano soit {{ ADAUserHadEuro }} euros</li>
+          <li *ngIf="user.xrp !== 0">{{ user.xrp }} xrp soit {{ XRPUserHadEuro }} euros</li>
+        </ul>
+      </div>  
 </div>
 <ng-template #elseBlock>
   <p>Vous n'avez fait aucun investissement pour le moment</p>
@@ -152,7 +152,10 @@
       </table>      
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')" (click)="onSubmit()" [disabled]="userForm.invalid">Valider et Sauvergarder</button>
+      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')" (click)="onSubmit()" [disabled]="userForm.invalid" *ngIf="this.loadingSellCrypto; else otherElseBlock">Valider et Sauvergarder</button>
+      <ng-template #otherElseBlock>
+        <p>Le montant que vous voulez vendre est supérieur à votre solde, Veuillez le rectifier</p>
+      </ng-template>
     </div>
   </ng-template>
 
@@ -162,72 +165,6 @@
 </form>
 
 
-
-<!-- Tableau à mettre dans un modal -->
-<!-- <table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th>Crypto</th>
-      <th>Montant en crypto</th>
-      <th>Montant en euros</th>
-    </tr>
-  </thead>
-  <tbody class="crypto-list-item">
-    <tr *ngIf="cryptoTabBuy[0] !== 0">
-      <td>Bitcoin</td>
-      <td>{{ cryptoTabBuy[0] }}</td>
-      <td>{{ BTCSelectedBuy }}</td>
-    </tr>
-    <tr *ngIf="cryptoTabBuy[1] !== 0">
-      <td>Etherum</td>
-      <td>{{ cryptoTabBuy[1] }}</td>
-      <td>{{ ETHSelectedBuy }}</td>
-    </tr>
-    <tr *ngIf="cryptoTabBuy[2] !== 0">
-      <td>Binance Coin</td>
-      <td>{{ cryptoTabBuy[2] }}</td>
-    </tr>
-    <tr *ngIf="cryptoTabBuy[3] !== 0">
-      <td>Litecoin</td>
-      <td>{{ cryptoTabBuy[3] }}</td>
-    </tr>
-    <tr *ngIf="cryptoTabBuy[4] !== 0">
-      <td>EOS</td>
-      <td>{{ cryptoTabBuy[4] }}</td>
-    </tr>
-    <tr *ngIf="cryptoTabBuy[5] !== 0">
-      <td>Bitcoin Cash</td>
-      <td>{{ cryptoTabBuy[5] }}</td>
-    </tr>
-    <tr *ngIf="cryptoTabBuy[6] !== 0">
-      <td>Tron</td>
-      <td>{{ cryptoTabBuy[6] }}</td>
-    </tr>
-    <tr *ngIf="cryptoTabBuy[7] !== 0">
-      <td>Neo etherum Chinois</td>
-      <td>{{ cryptoTabBuy[7] }}</td>
-    </tr>
-    <tr *ngIf="cryptoTabBuy[8] !== 0">
-      <td>Cardano</td>
-      <td>{{ cryptoTabBuy[8] }}</td>
-    </tr>
-    <tr *ngIf="cryptoTabBuy[9] !== 0">
-      <td>XRP</td>
-      <td>{{ cryptoTabBuy[9] }}</td>
-    </tr>
-  </tbody>
-</table> -->
-
-
-<!-- <button mat-button (click)="openDialog()">Open dialog</button>
-
-
-<h2 mat-dialog-title>Install Angular</h2>
-<mat-dialog-content class="mat-typography">
-
-  <p>Hello</p>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
-</mat-dialog-actions> -->
+<div>
+    <button class="btn btn-lg btn-outline-primary" (click)="sellAllCryptos()">TOUT VENDRE</button>
+  </div>

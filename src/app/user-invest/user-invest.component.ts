@@ -25,7 +25,19 @@ export class UserInvestComponent implements OnInit {
   cryptos: Crypto[];
   errorMsg: string;
   
-  cryptoTabPrice: string[] = [];
+  cryptoTabPrice: number[] = [];
+
+  BTCUserHadEuro: number;
+  ETHUserHadEuro: number;
+  BNBUserHadEuro: number;
+  LTCUserHadEuro: number;
+  EOSUserHadEuro: number;
+  BCHUserHadEuro: number;
+  TRXUserHadEuro: number;
+  NEOUserHadEuro: number;
+  ADAUserHadEuro: number;
+  XRPUserHadEuro: number;
+  montantTotalPossede: number;
   
   cryptoSelectedOpen: string;
   isBTCvisible: boolean;
@@ -90,57 +102,86 @@ export class UserInvestComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userCall();    
+  }
+
+  userCall () {
     this.userId = this.auth.getUserId();
     this.loading = true;
     this.route.params.subscribe(
       (params) => {
-          this.users.getUserById(this.userId).then(
-            (user: User) => {
-              this.user = user;
-              this.initEmptyForm()
-              //this.initModifyForm(user);
-              this.loading = false;
-            }
-          ).catch(
-            (error) => {
-              this.errorMsg = JSON.stringify(error);
-            }
-          );
+        this.users.getUserById(this.userId).then(
+          async (user: User) => {
+            this.user = user;
+            this.initEmptyForm();
+            console.log(this.user)
+            this.loading = false;
+            this.cryptoCall();
+            ;
+          }
+        );
       }
-    );
+    )
+  }
+
+  cryptoCall() {
+    this.userId = this.auth.getUserId();
     this.cryptoSub = this.crypto.cryptos$.subscribe(
-      (cryptos) => {
-        this.cryptos = cryptos;
-        console.log(this.cryptos);
+    (cryptos) => {
+      this.cryptos = cryptos;
+      this.loading = false;
       for(var i = 0; i < cryptos.length; i++) {
         switch (this.cryptos[i]["cryptoName"]) {
+          case 'BTC':
+          case 'ETH':
+          case 'BNB':
+          case 'LTC':
+          case 'EOS':
           case 'BCH':
-          case 'XRP':
-          case 'ADA':
-          case 'NEO':
           case 'TRX':
           case 'NEO':
-          case 'EOS':
-          case 'LTC':
-          case 'BNB':
-          case 'ETH':
-          case 'BTC':
           case 'ADA':
-            this.cryptoTabPrice.push(cryptos[i]["price"]);
+          case 'XRP':
+            this.cryptoTabPrice.push(+cryptos[i]["price"]);
             break;
         }
       };
       console.log(this.cryptoTabPrice);
-        this.loading = false;
-        this.errorMsg = null;
-      },
-      (error) => {
-        this.errorMsg = JSON.stringify(error);
-        this.loading = false;
-      }
-    );
+      console.log(this.user.btc);
+      this.calculIntermediareUserHad();
+    },
+    (error) => {
+      this.errorMsg = JSON.stringify(error);
+      this.loading = false;
+    });
     this.crypto.getCryptos();
-    console.log(this.cryptoTabBuy);
+  }
+
+  calculIntermediareUserHad() {
+    console.log(this.BTCUserHadEuro);
+    console.log(this.user.btc);
+    console.log(this.cryptoTabPrice[0]);
+    this.BCHUserHadEuro = this.cryptoTabPrice[0] * this.user.btc;
+    console.log(this.BTCUserHadEuro);
+    this.XRPUserHadEuro = this.cryptoTabPrice[1] * this.user.xrp;
+    this.ADAUserHadEuro = this.cryptoTabPrice[2] * this.user.ada;
+    this.NEOUserHadEuro = this.cryptoTabPrice[3] * this.user.neo;
+    this.TRXUserHadEuro = this.cryptoTabPrice[4] * this.user.trx;
+    this.EOSUserHadEuro = this.cryptoTabPrice[5] * this.user.eos;
+    this.LTCUserHadEuro = this.cryptoTabPrice[6] * this.user.ltc;
+    this.BNBUserHadEuro = this.cryptoTabPrice[7] * this.user.bnb;
+    this.ETHUserHadEuro = this.cryptoTabPrice[8] * this.user.eth;
+    this.BTCUserHadEuro = this.cryptoTabPrice[9] * this.user.btc;
+    this.montantTotalPossede = this.BTCUserHadEuro
+    + this.ETHUserHadEuro
+    + this.BNBUserHadEuro
+    + this.LTCUserHadEuro
+    + this.EOSUserHadEuro
+    + this.BCHUserHadEuro
+    + this.TRXUserHadEuro
+    + this.NEOUserHadEuro
+    + this.ADAUserHadEuro
+    + this.XRPUserHadEuro;
   }
 
   initEmptyForm() {
@@ -199,48 +240,48 @@ export class UserInvestComponent implements OnInit {
   BuyBTCCrytpo() {
    
       this.BTCSelectedBuy = this.userForm.get('btc').value;
-      let BTCSelectedBuyResult = this.userForm.get('btc').value / (+this.cryptoTabPrice[0]);
+      let BTCSelectedBuyResult = this.userForm.get('btc').value / (this.cryptoTabPrice[0]);
       this.cryptoTabBuy.push(BTCSelectedBuyResult);
 
       this.ETHSelectedBuy = this.userForm.get('eth').value
-      let ETHSelectedBuyResult = this.userForm.get('eth').value / (+this.cryptoTabPrice[1]);
+      let ETHSelectedBuyResult = this.userForm.get('eth').value / (this.cryptoTabPrice[1]);
       this.cryptoTabBuy.push(ETHSelectedBuyResult);
 
       this.BNBSelectedBuy = this.userForm.get('bnb').value
-      let BNBSelectedBuyResult = this.userForm.get('bnb').value / (+this.cryptoTabPrice[2]);
+      let BNBSelectedBuyResult = this.userForm.get('bnb').value / (this.cryptoTabPrice[2]);
       this.cryptoTabBuy.push(BNBSelectedBuyResult);
 
       this.LTCSelectedBuy = this.userForm.get('ltc').value
-      let LTCSelectedBuyResult = this.userForm.get('ltc').value / (+this.cryptoTabPrice[3]);
+      let LTCSelectedBuyResult = this.userForm.get('ltc').value / (this.cryptoTabPrice[3]);
       this.cryptoTabBuy.push(LTCSelectedBuyResult);
 
       this.EOSSelectedBuy = this.userForm.get('eos').value
-      let EOSSelectedBuyResult = this.userForm.get('eos').value / (+this.cryptoTabPrice[4]);
+      let EOSSelectedBuyResult = this.userForm.get('eos').value / (this.cryptoTabPrice[4]);
       this.cryptoTabBuy.push(EOSSelectedBuyResult);
 
       this.BCHSelectedBuy = this.userForm.get('bch').value
-      let BCHSelectedBuyResult = this.userForm.get('bch').value / (+this.cryptoTabPrice[5]);
+      let BCHSelectedBuyResult = this.userForm.get('bch').value / (this.cryptoTabPrice[5]);
       this.cryptoTabBuy.push(BCHSelectedBuyResult);
 
       this.TRXSelectedBuy = this.userForm.get('trx').value
-      let TRXSelectedBuyResult = this.userForm.get('trx').value / (+this.cryptoTabPrice[6]);
+      let TRXSelectedBuyResult = this.userForm.get('trx').value / (this.cryptoTabPrice[6]);
       this.cryptoTabBuy.push(TRXSelectedBuyResult);
 
       this.NEOSelectedBuy = this.userForm.get('neo').value
-      let NEOSelectedBuyResult = this.userForm.get('neo').value / (+this.cryptoTabPrice[7]);
+      let NEOSelectedBuyResult = this.userForm.get('neo').value / (this.cryptoTabPrice[7]);
       this.cryptoTabBuy.push(NEOSelectedBuyResult);
 
       this.ADASelectedBuy = this.userForm.get('ada').value
-      let ADASelectedBuyResult = this.userForm.get('ada').value / (+this.cryptoTabPrice[8]);
+      let ADASelectedBuyResult = this.userForm.get('ada').value / (this.cryptoTabPrice[8]);
       this.cryptoTabBuy.push(ADASelectedBuyResult);
 
       this.XRPSelectedBuy = this.userForm.get('xrp').value
-      let XRPSelectedBuyResult = this.userForm.get('xrp').value / (+this.cryptoTabPrice[9]);
+      let XRPSelectedBuyResult = this.userForm.get('xrp').value / (this.cryptoTabPrice[9]);
       this.cryptoTabBuy.push(XRPSelectedBuyResult);
   }
 
-  // }
 
+  // Pour initier les valeurs dans les input avec les valeur de l'utilisateur (non utile ?)
   initModifyForm(user: User) {
     this.userForm = this.formBuilder.group({
       montantDepose: [this.user.montantDepose],
@@ -254,7 +295,6 @@ export class UserInvestComponent implements OnInit {
       neo: [this.user.neo],
       ada: [this.user.ada],
       xrp: [this.user.xrp],
-      //heatValue: [{value: this.sauce.heat, disabled: true}]
     });
   }
 
