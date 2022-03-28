@@ -13,9 +13,9 @@ export class UsersService {
 
   updateUserInvest(id: number, user: User) {
     return new Promise((resolve, reject) => {
-      this.http.get(API_URL + id).subscribe(
-        (user: User) => {
-          resolve(user);
+      this.http.put(API_URL + id, user).subscribe(
+        (response) => {
+          resolve(response);
         },
         (error) => {
           reject(error);

@@ -3,6 +3,7 @@
     <h2>Investissement de {{ user.userName }}</h2>
     <div *ngIf="user.montantDepose !== 0; else elseBlock">
       <h3>Montant Total de l'investissement: {{ user.montantDepose | currency: 'EUR' : 'symbol' : '1.2-2'}}</h3>
+      <h3>Montant Total de l'argent récupérer : 0</h3>
       <div>
         <ul>
           <p>Vous possèdez actuellement :</p>
@@ -15,7 +16,7 @@
           <li *ngIf="user.trx !== 0">{{ user.trx }} Tron</li>
           <li *ngIf="user.neo !== 0">{{ user.neo }} Neo Etherum chinois</li>
           <li *ngIf="user.ada !== 0">{{ user.ada }} Cardano</li>
-          <li *ngIf="user.xrp !== 0">Vous possèdez : {{ user.xrp | currency: 'EUR' : 'symbol' : '1.2-2'}} XRP</li>
+          <li *ngIf="user.xrp !== 0">Vous possèdez : {{ user.xrp | currency: 'EUR' : 'symbol' : '1.2-2'}} xrp</li>
         </ul>
       </div>  
     </div>

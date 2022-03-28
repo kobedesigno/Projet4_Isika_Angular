@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './auth/login/login.component';
 import { UserProfilComponent } from './user-profile/user-profil.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { UserInvestComponent } from './user-invest/user-invest.component';
 
 import { AuthInterceptor } from './_interceptors/auth-interceptor';
 
@@ -24,7 +25,8 @@ import { AuthInterceptor } from './_interceptors/auth-interceptor';
     CryptoSingleComponent,
     LoginComponent,
     UserProfilComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserInvestComponent,
   ],
   imports: [
     BrowserModule,
