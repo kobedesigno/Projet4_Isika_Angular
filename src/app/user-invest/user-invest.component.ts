@@ -9,6 +9,7 @@ import { UsersService } from '../_services/users.service';
 import { Crypto } from '../models/Crypto.model';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+
 @Component({
   selector: 'app-user-invest',
   templateUrl: './user-invest.component.html',
@@ -17,13 +18,19 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class UserInvestComponent implements OnInit {
 
+  isAuth: boolean;
+  authSubscription: Subscription;
+
   userForm: FormGroup;
   loading: boolean;
+  tableIsVisible: boolean;
   user: User;
   userId: number;
   cryptoSub: Subscription;
   cryptos: Crypto[];
   errorMsg: string;
+  
+
   
   cryptoTabPrice: number[] = [];
 
@@ -102,7 +109,13 @@ export class UserInvestComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userCall();    
+    this.userCall(); 
+    
+    this.authSubscription = this.auth.isAuth$.subscribe(
+      (auth) => {
+        this.isAuth = auth;
+      }
+    );
   }
 
   userCall () {
@@ -278,6 +291,12 @@ export class UserInvestComponent implements OnInit {
       this.XRPSelectedBuy = this.userForm.get('xrp').value
       let XRPSelectedBuyResult = this.userForm.get('xrp').value / (this.cryptoTabPrice[9]);
       this.cryptoTabBuy.push(XRPSelectedBuyResult);
+
+      this.tableIsVisible = true;
+  }
+
+  onClose() {
+    this.tableIsVisible = false;
   }
 
 

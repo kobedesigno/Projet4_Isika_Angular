@@ -1,0 +1,36 @@
+
+.imageCrypto {
+    width: 55px;
+    height: 55px;
+    margin-right: 30px;
+}
+.nameCrypto {
+    font-size: 35px;
+    font-weight: bold;
+}
+.cryptoDescriptionAll {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    margin: 20px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    border: 3px solid #282d32;
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+    // box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    //         0 10px 10px rgba(0,0,0,0.22);
+    &:hover {
+        transform: scale(1.02);
+        box-shadow: 1px 1px 20px rgba(120, 120, 120, 0.3);
+    }
+}
+.nameAndLogo {
+    display: flex;
+    justify-content:left;
+    flex-direction: row;
+}

@@ -1,19 +1,34 @@
-<form [formGroup]="signupForm" *ngIf="!loading">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" formControlName="email">
-  </div>
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" class="form-control" id="username" formControlName="username">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" formControlName="password">
-  </div>
-  <button mat-raised-button color="primary" [disabled]="signupForm.invalid" (click)="onSignup()">SIGN UP</button>
-  <p class="text-danger" *ngIf="errorMsg">{{ errorMsg }}</p>
-</form>
+<div class="sign-up-container">
+  <form [formGroup]="signupForm" *ngIf="!loading">
+    <h1>Créer un compte</h1>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" formControlName="username" minlength="6" maxlength="20">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" formControlName="password" minlength="6" maxlength="30">
+    </div>
+    <button mat-raised-button color="primary" [disabled]="signupForm.invalid" (click)="onSignup()">SIGN UP</button>
+    <p class="text-danger" *ngIf="errorMsg">{{ errorMsg }}</p>
+  </form>
+</div>
+
+<!-- <div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form [formGroup]="loginForm" *ngIf="!loading">
+			<h1>Create Account</h1>
+			<span>or use your email for registration</span>
+			<input type="text" placeholder="Name" />
+			<input type="email" placeholder="Email" />
+			<input type="password" placeholder="Password" />
+			<button>Sign Up</button>
+		</form>
+	</div> -->
 
 
 

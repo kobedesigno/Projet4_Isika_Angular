@@ -1,0 +1,81 @@
+<div class="user-container" *ngIf="!loading">
+  <div class="user-info">
+    <div class="usernameRecap">
+      <h2>Récapitulatif des investissements</h2>
+    </div>
+    <div class="MontantTotal" *ngIf="user.montantDepose !== 0; else elseBlock">
+        <div class="totalInvestis">
+          <p>Montant Investis:</p>
+          <p><span class="miseEnFormeChiffreS">{{ user.montantDepose | currency: 'EUR' : 'symbol' : '1.2-2'}}</span></p>
+        </div>
+        <div class="totalArgentpossede">
+          <p>Montant Possedé:</p>
+          <p><span class="miseEnFormeChiffreP">{{ montantTotalPossede | currency: 'EUR' : 'symbol' : '1.2-2'}}</span></p>
+        </div>
+    </div>
+    <br>
+      <div class="montantInvestisDetails" *ngIf="user.montantDepose !== 0">
+        <p>Vous possèdez actuellement :</p>
+        <ul>
+          <li *ngIf="user.btc !== 0">{{ user.btc }} <span class="crypto">Bitcoin</span> soit {{ BTCUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
+          <li *ngIf="user.eth !== 0">{{ user.eth }} Etherum  soit  {{ ETHUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
+          <li *ngIf="user.bnb !== 0">{{ user.bnb }} Binance Coin  soit  {{ BNBUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
+          <li *ngIf="user.ltc !== 0">{{ user.ltc }} Litecoin  soit  {{ LTCUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
+          <li *ngIf="user.eos !== 0">{{ user.eos }} Eos  soit  {{ EOSUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
+          <li *ngIf="user.bch !== 0">{{ user.bch }} Bitcoin Cash  soit  {{ BCHUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
+          <li *ngIf="user.trx !== 0">{{ user.trx }} Tron  soit  {{ TRXUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}} euros</li>
+          <li *ngIf="user.neo !== 0">{{ user.neo }} Neo Etherum chinois  soit  {{ NEOUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
+          <li *ngIf="user.ada !== 0">{{ user.ada }} Cardano  soit  {{ ADAUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
+          <li *ngIf="user.xrp !== 0">{{ user.xrp }} xrp  soit  {{ XRPUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}} </li>
+        </ul>
+      </div>  
+  </div>
+    <ng-template class="ng-template" #elseBlock>
+      <p>Vous n'avez fait aucun achat pour le moment</p>
+    </ng-template>
+    <div class="control-buttons">
+      <button mat-raised-button color="primary" (click)="onInvest()" *ngIf="userId === user.id">Acheter</button>
+      <button mat-raised-button color="primary" (click)="onSell()" *ngIf="userId === user.id && user.montantDepose !== 0">Vendre</button>
+      <!-- <button mat-raised-button color="warn" (click)="onDelete()" *ngIf="userId === user._id">DELETE</button> -->
+    </div>
+    <!-- <br>
+    <div class="table-responsive">
+      <h3>Voici le prix des cryptos actuellement : </h3>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>Crypto</th>
+            <th>Prix</th>
+          </tr>
+        </thead>
+        <tbody class="crypto-list-item" *ngFor="let crypto of cryptos" (click)="onClickCrypto(crypto.cryptoName)">
+          <tr>
+            <td>{{ crypto.cryptoName | uppercase }}</td>
+            <td>{{ crypto.price | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div> -->
+
+<!-- <div class="container" *ngIf="currentUser; else loggedOut">
+    <header class="jumbotron">
+      <h3>
+        <strong>{{ currentUser.username }}</strong> Profile
+      </h3>
+    </header>
+    <p>
+      <strong>Token:</strong>
+      {{ currentUser.accessToken.substring(0, 20) }} ...
+      {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}
+    </p>
+    <p>
+      <strong>Email:</strong>
+      {{ currentUser.email }}
+    </p>
+  </div>
+  
+  <ng-template #loggedOut>
+    Please login.
+  </ng-template>
+   -->

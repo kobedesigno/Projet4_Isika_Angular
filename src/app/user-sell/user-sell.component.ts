@@ -18,8 +18,12 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class UserSellComponent implements OnInit {
 
+  isAuth: boolean;
+  authSubscription: Subscription;
+
   userForm: FormGroup;
   loading: boolean;
+  tableIsVisible: boolean;
   user: User;
   userId: number;
   errorMessage: string;
@@ -95,7 +99,13 @@ export class UserSellComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userCall();    
+    this.userCall();
+
+    this.authSubscription = this.auth.isAuth$.subscribe(
+      (auth) => {
+        this.isAuth = auth;
+      }
+    );
   }
 
   userCall () {
@@ -320,7 +330,15 @@ export class UserSellComponent implements OnInit {
     || this.user.ada < this.cryptoTabBuy[8]
     || this.user.xrp < this.cryptoTabBuy[9]) {
       this.loadingSellCrypto = false
+    } else {
+      this.loadingSellCrypto = true;
     }
+
+    this.tableIsVisible = true;
+}
+
+onClose() {
+  this.tableIsVisible = false;
 }
 
 onSubmit() {
@@ -401,6 +419,10 @@ onSubmit() {
         this.errorMsg = error.message;
       }
     );
+  }
+
+  onInvest() {
+    this.router.navigate(['invest']);
   }
 
 

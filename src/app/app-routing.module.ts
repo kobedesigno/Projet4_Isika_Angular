@@ -5,8 +5,9 @@ import { CryptoSingleComponent } from './crypto-single/crypto-single.component';
 import { UserInvestComponent } from './user-invest/user-invest.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
-import { UserProfilComponent } from './user-profile/user-profil.component';
+import { UserProfilComponent } from './user-profil/user-profil.component';
 import { UserSellComponent } from './user-sell/user-sell.component';
+import { AcceuilComponent } from './acceuil/acceuil.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,9 +20,10 @@ const routes: Routes = [
     // ],
   },
   { path: 'sell', component: UserSellComponent},
+  { path: 'acceuil', component: AcceuilComponent},
   { path: 'crypto/:cryptoName', component: CryptoSingleComponent},
-  { path: '', pathMatch: 'full', redirectTo: 'cryptos'},
-  { path: '**', redirectTo: 'crytpos' }
+  { path: '', pathMatch: 'full', redirectTo: 'acceuil'},
+  { path: '**', redirectTo: 'acceuil' }
 ];
 
 @NgModule({

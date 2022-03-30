@@ -20,7 +20,7 @@
     transition: all 0.1s ease-in-out;
     cursor: pointer;
     &:hover {
-      transform: scale(1.05);
+      transform: scale(1.02);
       box-shadow: 1px 1px 20px rgba(120, 120, 120, 0.3);
     }
   }
@@ -30,3 +30,7 @@
     margin: 2em auto;
   }
   
+  .imageCrypto {
+    width: 35px;
+    height: 35px;
+  }

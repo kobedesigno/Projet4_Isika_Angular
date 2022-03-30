@@ -1,53 +1,33 @@
 nav {
     box-sizing: border-box;
     width: 100%;
+    height: 15%!important;
+    color:#f0f9ff;
+    background-color:#282d32;
     max-width: 1400px;
     margin: auto;
     position: relative;
     top: 0;
     left: 0;
     display: flex;
-    padding: 20px;
     justify-content: space-between;
     border-bottom: thin solid black;
   }
   
-  h1 {
-    font-weight: 700;
-    font-size: 2.4em;
-    margin: 0;
-  }
+
   
-  h5 {
-    font-size: 1.2em;
-    font-weight: 400;
-    margin: 0;
-  }
   
-  .logo {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo-text {
-    text-align: center;
-  }
-  
-  .logo-image {
-    img {
-      height: 4.5em;
-    }
-    margin-right: 1em;
-  }
   
   .left-nav, .right-nav {
     align-self: center;
-    width: 30%;
   }
   
   .right-nav {
-    ul {
       justify-content: flex-end;
+  }
+  .left-nav {
+    ul {
+      justify-content: flex-start;
     }
   }
   
@@ -63,7 +43,7 @@ nav {
   }
   
   a {
-    color: black;
+    color: white;
     font-weight: 400;
     text-decoration: none;
     cursor: pointer;

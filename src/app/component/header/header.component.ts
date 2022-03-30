@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../_services/auth.service';
+import { AuthService } from '../../_services/auth.service';
 // import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
@@ -12,6 +12,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isAuth: boolean;
   authSubscription: Subscription;
+  private toggleButton: any;
+  private sidebarVisible: boolean;
 
   constructor(private auth: AuthService) { }
 

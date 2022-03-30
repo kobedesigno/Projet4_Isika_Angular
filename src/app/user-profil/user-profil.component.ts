@@ -129,10 +129,6 @@ export class UserProfilComponent implements OnInit {
     this.router.navigate(['crypto', cryptoName]);
   }
 
-  onBack() {
-    this.router.navigate(['cryptos']);
-  }
-
   onInvest() {
     this.router.navigate(['invest']);
   }
@@ -157,8 +153,4 @@ export class UserProfilComponent implements OnInit {
   //     }
   //   );
   // }
-}
-
-function intermediaire(): any {
-  throw new Error('Function not implemented.');
 }

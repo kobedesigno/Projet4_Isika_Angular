@@ -1,29 +1,29 @@
 <p *ngIf="!loading && cryptos.length <= 0">
   No cryptos to display!
 </p>
-<p class="list-title" *ngIf="!loading && cryptos.length > 0">THE CRYPTOS</p>
+<p class="list-title" *ngIf="!loading && cryptos.length > 0">LES CRYPTOS</p>
 <div class="crypto-list" *ngIf="!loading && cryptos.length  > 0">
     <div class="table-responsive">
       <table class="table">
         <thead class="thead-light">
           <tr>
-            <th>#</th>
+            <th>Logo</th>
             <th>Crypto</th>
-            <th>Prix</th>
-            <th>Total Vol</th>
-            <th>Top Tier Vol</th>
-            <th>Last 7 Days</th>
+            <th>Prix (€)</th>
+            <th>Total Volume (€)</th>
+            <th>Top Tier Volume (€)</th>
+            <th>Market Cap (€)</th>
             <th>Change</th>
           </tr>
         </thead>
-        <tbody class="crypto-list-item" *ngFor="let crypto of cryptos" (click)="onClickCrypto(crypto.cryptoName)">
+        <tbody class="crypto-list-item" *ngFor="let crypto of cryptos; let i = index" (click)="onClickCrypto(crypto.cryptoName)">
           <tr>
-            <td><img [src]="crypto.imageUrl"></td>
+            <td><img class="imageCrypto" [src]="cryptoTabImg[i]"></td>
             <td>{{ crypto.cryptoName | uppercase }}</td>
-            <td>{{ crypto.price | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
-            <td>{{ crypto.totalVolume24H | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
-            <td>{{ crypto.totalToptierVolume24H | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
-            <td></td>
+            <td>{{ crypto.price | number : '1.2-2' }}</td>
+            <td>{{ crypto.totalVolume24H | number : '1.2-2' }}</td>
+            <td>{{ crypto.totalToptierVolume24H | number : '1.2-2' }}</td>
+            <td>{{ crypto.MKTCAP | number : '1.2-2' }}</td>
             <td>{{ crypto.changeHour | percent}}</td>
           </tr>
         </tbody>

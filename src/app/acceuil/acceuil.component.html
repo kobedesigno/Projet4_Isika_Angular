@@ -1,0 +1,21 @@
+<div class="Introduction">
+    <h1>La Crypto App</h1>
+    <p>La crypto App est un application qui s'adresse à toute les personnes qui souhaitent s'inititer à l'achat de cryptomonnaies</p>
+    <p>Elle vous permettra de simuler l'achat de cryptomonnaies en temps réel - mise à jour toute les heures - ! Nous avons sélectionné pour vous 10 cryptomonnaies afin de réduire votre choix pour mieux pouvoir intérpréter l'évolution du marché</p>
+    <p>Ci-dessous, nous allons vous présentez les 10 cryptomonnaies que nous avons choisis pour vous :</p>
+</div>
+<p *ngIf="!loading && cryptos.length <= 0">
+    No cryptos to display!
+  </p>
+  <div class="cryptoDescriptionAll" *ngFor="let crypto of cryptos ; let i = index" (click)="onClickCrypto(crypto.cryptoName)">
+    <div class="nameAndLogo">
+        <div>
+            <img class="imageCrypto" [src]="cryptoTabImg[i]">
+        </div>
+        <div>
+            <p class="nameCrypto">{{ crypto.cryptoName | uppercase}}</p>
+        </div>
+    </div>
+    <div>{{cryptoTabDescription[i]}}</div>
+  </div>
+  

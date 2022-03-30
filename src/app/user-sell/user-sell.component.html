@@ -1,170 +1,164 @@
 <div *ngIf="user.montantDepose !== 0; else elseBlock">
-    <h3>Montant Total de l'investissement: {{ user.montantDepose | currency: 'EUR' : 'symbol' : '1.2-2'}}</h3>
-    <h3>Montant Total de l'argent possédé : {{ montantTotalPossede }}</h3>
-    <div>
-        <p>Vous possèdez actuellement :</p>
-        <ul>
-          <li *ngIf="user.btc !== 0">{{ user.btc }} Bitcoin soit {{ BTCUserHadEuro }} euros</li>
-          <li *ngIf="user.eth !== 0">{{ user.eth }} Etherum soit {{ ETHUserHadEuro }} euros</li>
-          <li *ngIf="user.bnb !== 0">{{ user.bnb }} Binance Coin soit {{ BNBUserHadEuro }} euros</li>
-          <li *ngIf="user.ltc !== 0">{{ user.ltc }} Litecoin soit {{ LTCUserHadEuro }} euros</li>
-          <li *ngIf="user.eos !== 0">{{ user.eos }} Eos soit {{ EOSUserHadEuro }} euros</li>
-          <li *ngIf="user.bch !== 0">{{ user.bch }} Bitcoin Cash soit {{ BCHUserHadEuro }} euros</li>
-          <li *ngIf="user.trx !== 0">{{ user.trx }} Tron soit {{ TRXUserHadEuro }} euros</li>
-          <li *ngIf="user.neo !== 0">{{ user.neo }} Neo Etherum chinois soit {{ NEOUserHadEuro }} euros</li>
-          <li *ngIf="user.ada !== 0">{{ user.ada }} Cardano soit {{ ADAUserHadEuro }} euros</li>
-          <li *ngIf="user.xrp !== 0">{{ user.xrp }} xrp soit {{ XRPUserHadEuro }} euros</li>
-        </ul>
-      </div>  
+  <div class=" achatTotal" *ngIf="isAuth">
+    <div class="selectionCrypto">
+    <label for="crypto-select">Sélectionné une ou plusieurs crytpos</label>
+    <select name="crypto-select" id="crypto-select">
+        <option value="">--Choisir la/les crypto(s)--</option>
+        <option value="btc">Bitcoin</option>
+        <option value="eth">etherum</option>
+        <option value="bnb">Binance Coin</option>
+        <option value="ltc">Litecoin</option>
+        <option value="eos">eos</option>
+        <option value="bch">Bitcoin Cash</option>
+        <option value="trx">Tron</option>
+        <option value="trx">trx etherum Chinois</option>
+        <option value="ada">Cardano</option>
+        <option value="xrp">xrp</option>
+    </select>
+    <button class=""
+            type="button"
+            (click)="OpenSelectCrytpo()">Ajouter
+    </button>
+  </div>
+
+  <div>
+    <form *ngIf="!loading" [formGroup]="userForm"><!--*ngIf="!loading" *ngIf="user"-->
+      <div class="formWithInput">
+        <div class="form-group" *ngIf="isBTCvisible">
+          <label for="btc">Bitcoin</label>
+          <i class="fa-solid fa-rectangle-xmark"></i>
+          <input type="number" class="form-control" id="btc" formControlName="btc" step="10" min="0" max="1000">
+        </div>
+        <div class="form-group" *ngIf="isETHvisible">
+          <label for="eth">Etherum</label>
+          <input type="number" class="form-control" id="eth" formControlName="eth">
+        </div>
+        <div class="form-group" *ngIf="isBNBvisible">
+          <label for="bnb">Binance Coin</label>
+          <input type="number" class="form-control" id="bnb" rows="5" formControlName="bnb">
+        </div>
+        <div class="form-group" *ngIf="isLTCvisible">
+          <label for="ltc">Litecoin</label>
+          <input type="number" class="form-control" id="ltc" rows="5" formControlName="ltc">
+        </div>
+        <div class="form-group" *ngIf="isEOSvisible">
+          <label for="eos">EOS</label>
+          <input type="number" class="form-control" id="eos" rows="5" formControlName="eos">
+        </div>
+        <div class="form-group" *ngIf="isBCHvisible">
+          <label for="bch">Bitcoin Cash</label>
+          <input type="number" class="form-control" id="bch" rows="5" formControlName="bch">
+        </div>
+        <div class="form-group" *ngIf="isTRXvisible">
+          <label for="trx">Tron</label>
+          <input type="number" class="form-control" id="trx" rows="5" formControlName="trx">
+        </div>
+        <div class="form-group" *ngIf="isNEOvisible">
+          <label for="neo">Neo etherum Chinois</label>
+          <input type="number"a class="form-control" id="neo" rows="5" formControlName="neo">
+        </div>
+        <div class="form-group" *ngIf="isADAvisible">
+          <label for="ada">Cardano</label>
+          <input type="number" class="form-control" id="ada" rows="5" formControlName="ada">
+        </div>
+        <div class="form-group" *ngIf="isXRPvisible">
+          <label for="xrp">XRP</label>
+          <input type="number" class="form-control" id="xrp" rows="5" formControlName="xrp">
+        </div>
+        <button (click)="BuyBTCCrytpo()" *ngIf="isXRPvisible
+                                                                                      || isADAvisible
+                                                                                      || isNEOvisible
+                                                                                      || isBCHvisible
+                                                                                      || isTRXvisible
+                                                                                      || isEOSvisible
+                                                                                      || isLTCvisible
+                                                                                      || isBNBvisible
+                                                                                      || isETHvisible
+                                                                                      || isBTCvisible">Valider</button>
+      </div>
+
+      <div class="tableIsVisible" *ngIf="tableIsVisible">
+        <h4 class="titleTableRecap">Récapitulatif des Ventes</h4>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Crypto</th>
+              <th>Montant en crypto</th>
+              <th>Montant en euros</th>
+            </tr>
+          </thead>
+          <tbody class="crypto-list-item">
+            <tr *ngIf="cryptoTabBuy[0] !== 0">
+              <td>Bitcoin</td>
+              <td>{{ cryptoTabBuy[0] }}</td>
+              <td>{{ BTCSelectedBuy }}</td>
+            </tr>
+            <tr *ngIf="cryptoTabBuy[1] !== 0">
+              <td>Etherum</td>
+              <td>{{ cryptoTabBuy[1] }}</td>
+              <td>{{ ETHSelectedBuy }}</td>
+            </tr>
+            <tr *ngIf="cryptoTabBuy[2] !== 0">
+              <td>Binance Coin</td>
+              <td>{{ cryptoTabBuy[2] }}</td>
+              <td>{{ BNBSelectedBuy }}</td>
+            </tr>
+            <tr *ngIf="cryptoTabBuy[3] !== 0">
+              <td>Litecoin</td>
+              <td>{{ cryptoTabBuy[3] }}</td>
+              <td>{{ LTCSelectedBuy }}</td>
+            </tr>
+            <tr *ngIf="cryptoTabBuy[4] !== 0">
+              <td>EOS</td>
+              <td>{{ cryptoTabBuy[3] }}</td>
+              <td>{{ EOSSelectedBuy }}</td>
+            </tr>
+            <tr *ngIf="cryptoTabBuy[5] !== 0">
+              <td>Bitcoin Cash</td>
+              <td>{{ cryptoTabBuy[5] }}</td>
+              <td>{{ BCHSelectedBuy }}</td>
+            </tr>
+            <tr *ngIf="cryptoTabBuy[6] !== 0">
+              <td>Tron</td>
+              <td>{{ cryptoTabBuy[6] }}</td>
+              <td>{{ TRXSelectedBuy }}</td>
+            </tr>
+            <tr *ngIf="cryptoTabBuy[7] !== 0">
+              <td>Neo etherum Chinois</td>
+              <td>{{ cryptoTabBuy[7] }}</td>
+              <td>{{ NEOSelectedBuy }}</td>
+            </tr>
+            <tr *ngIf="cryptoTabBuy[8] !== 0">
+              <td>Cardano</td>
+              <td>{{ cryptoTabBuy[8] }}</td>
+              <td>{{ ADASelectedBuy }}</td>
+            </tr>
+            <tr *ngIf="cryptoTabBuy[9] !== 0">
+              <td>XRP</td>
+              <td>{{ cryptoTabBuy[9] }}</td>
+              <td>{{ XRPSelectedBuy }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="control-buttons">
+          <button type="button" (click)="onSubmit()" [disabled]="userForm.invalid" *ngIf="this.loadingSellCrypto; else otherElseBlock">Valider et Sauvergarder</button>
+          <ng-template #otherElseBlock>
+            <p>Le montant que vous voulez vendre est supérieur à votre solde, Veuillez le rectifier !</p>
+          </ng-template>
+          <button type="button" (click)="onClose()">Annuler</button>  
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="toutVendre" *ngIf="isAuth">
+  <button (click)="sellAllCryptos()">TOUT VENDRE</button>
+</div>
 </div>
 <ng-template #elseBlock>
-  <p>Vous n'avez fait aucun investissement pour le moment</p>
+  <div class="SellWithNoBuy">
+    <p>Vous n'avez fait aucun investissement pour le moment</p>
+    <br>
+    <button mat-raised-button color="primary" (click)="onInvest()" *ngIf="userId === user.id">Acheter</button>
+  </div>
 </ng-template>
-
-
-<label for="rypto-select">Choose a crypto</label>
-<select name="crypto-select" id="crypto-select">
-    <option value="">--Please choose an option--</option>
-    <option value="btc">Bitcoin</option>
-    <option value="eth">etherum</option>
-    <option value="bnb">Binance Coin</option>
-    <option value="ltc">Litecoin</option>
-    <option value="eos">eos</option>
-    <option value="bch">Bitcoin Cash</option>
-    <option value="trx">Tron</option>
-    <option value="trx">trx etherum Chinois</option>
-    <option value="ada">Cardano</option>
-    <option value="xrp">xrp</option>
-</select>
-<button class=""
-        type="button"
-        (click)="OpenSelectCrytpo()">Select
-</button>
-
-<form *ngIf="!loading" [formGroup]="userForm"><!--*ngIf="!loading" *ngIf="user"-->
-  <div class="form-group" *ngIf="isBTCvisible">
-    <label for="btc">Bitcoin - Montant à déposé :</label>
-    <input type="number" class="form-control" id="btc" formControlName="btc">euro
-  </div>
-  <div class="form-group" *ngIf="isETHvisible">
-    <label for="eth">Etherum</label>
-    <input type="number" class="form-control" id="eth" formControlName="eth">
-  </div>
-  <div class="form-group" *ngIf="isBNBvisible">
-    <label for="bnb">Binance Coin</label>
-    <input type="number" class="form-control" id="bnb" rows="5" formControlName="bnb">
-  </div>
-  <div class="form-group" *ngIf="isLTCvisible">
-    <label for="ltc">Litecoin</label>
-    <input type="number" class="form-control" id="ltc" rows="5" formControlName="ltc">
-  </div>
-  <div class="form-group" *ngIf="isEOSvisible">
-    <label for="eos">EOS</label>
-    <input type="number" class="form-control" id="eos" rows="5" formControlName="eos">
-  </div>
-  <div class="form-group" *ngIf="isBCHvisible">
-    <label for="bch">Bitcoin Cash</label>
-    <input type="number" class="form-control" id="bch" rows="5" formControlName="bch">
-  </div>
-  <div class="form-group" *ngIf="isTRXvisible">
-    <label for="trx">Tron</label>
-    <input type="number" class="form-control" id="trx" rows="5" formControlName="trx">
-  </div>
-  <div class="form-group" *ngIf="isNEOvisible">
-    <label for="neo">Neo etherum Chinois</label>
-    <input type="number"a class="form-control" id="neo" rows="5" formControlName="neo">
-  </div>
-  <div class="form-group" *ngIf="isADAvisible">
-    <label for="ada">Cardano</label>
-    <input type="number" class="form-control" id="ada" rows="5" formControlName="ada">
-  </div>
-  <div class="form-group" *ngIf="isXRPvisible">
-    <label for="xrp">XRP</label>
-    <input type="number" class="form-control" id="xrp" rows="5" formControlName="xrp">
-  </div>
-
-  <ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Récapitulatif des Achats</h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
-    </div>
-    <div class="modal-body">
-      <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th>Crypto</th>
-            <th>Montant en crypto</th>
-            <th>Montant en euros</th>
-          </tr>
-        </thead>
-        <tbody class="crypto-list-item">
-          <tr *ngIf="cryptoTabBuy[0] !== 0">
-            <td>Bitcoin</td>
-            <td>{{ cryptoTabBuy[0] }}</td>
-            <td>{{ BTCSelectedBuy }}</td>
-          </tr>
-          <tr *ngIf="cryptoTabBuy[1] !== 0">
-            <td>Etherum</td>
-            <td>{{ cryptoTabBuy[1] }}</td>
-            <td>{{ ETHSelectedBuy }}</td>
-          </tr>
-          <tr *ngIf="cryptoTabBuy[2] !== 0">
-            <td>Binance Coin</td>
-            <td>{{ cryptoTabBuy[2] }}</td>
-            <td>{{ BNBSelectedBuy }}</td>
-          </tr>
-          <tr *ngIf="cryptoTabBuy[3] !== 0">
-            <td>Litecoin</td>
-            <td>{{ cryptoTabBuy[3] }}</td>
-            <td>{{ LTCSelectedBuy }}</td>
-          </tr>
-          <tr *ngIf="cryptoTabBuy[4] !== 0">
-            <td>EOS</td>
-            <td>{{ cryptoTabBuy[3] }}</td>
-            <td>{{ EOSSelectedBuy }}</td>
-          </tr>
-          <tr *ngIf="cryptoTabBuy[5] !== 0">
-            <td>Bitcoin Cash</td>
-            <td>{{ cryptoTabBuy[5] }}</td>
-            <td>{{ BCHSelectedBuy }}</td>
-          </tr>
-          <tr *ngIf="cryptoTabBuy[6] !== 0">
-            <td>Tron</td>
-            <td>{{ cryptoTabBuy[6] }}</td>
-            <td>{{ TRXSelectedBuy }}</td>
-          </tr>
-          <tr *ngIf="cryptoTabBuy[7] !== 0">
-            <td>Neo etherum Chinois</td>
-            <td>{{ cryptoTabBuy[7] }}</td>
-            <td>{{ NEOSelectedBuy }}</td>
-          </tr>
-          <tr *ngIf="cryptoTabBuy[8] !== 0">
-            <td>Cardano</td>
-            <td>{{ cryptoTabBuy[8] }}</td>
-            <td>{{ ADASelectedBuy }}</td>
-          </tr>
-          <tr *ngIf="cryptoTabBuy[9] !== 0">
-            <td>XRP</td>
-            <td>{{ cryptoTabBuy[9] }}</td>
-            <td>{{ XRPSelectedBuy }}</td>
-          </tr>
-        </tbody>
-      </table>      
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')" (click)="onSubmit()" [disabled]="userForm.invalid" *ngIf="this.loadingSellCrypto; else otherElseBlock">Valider et Sauvergarder</button>
-      <ng-template #otherElseBlock>
-        <p>Le montant que vous voulez vendre est supérieur à votre solde, Veuillez le rectifier</p>
-      </ng-template>
-    </div>
-  </ng-template>
-
-   <button class="btn btn-lg btn-outline-primary"  (click)="open(content)" (click)="BuyBTCCrytpo()">Valider</button><!--(click)="BuyBTCCrytpo()" -->
-  <!-- <button color="primary" (click)="BuyBTCCrytpo()" [disabled]="userForm.invalid">Acheter</button> -->
-  <!-- <button class="" type="button" (click)="BuyBTCCrytpo()">Acheter</button> -->
-</form>
-
-
-<div>
-    <button class="btn btn-lg btn-outline-primary" (click)="sellAllCryptos()">TOUT VENDRE</button>
-  </div>
