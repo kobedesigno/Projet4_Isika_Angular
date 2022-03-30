@@ -1,19 +1,21 @@
 <div *ngIf="user.montantDepose !== 0; else elseBlock">
   <div class=" achatTotal" *ngIf="isAuth">
     <div class="selectionCrypto">
-    <label for="crypto-select">Sélectionné une ou plusieurs crytpos</label>
+      <label for="crypto-select">
+        <p>Sélectionné une ou plusieurs crytpos<br>(Montant vendu en euros)</p>
+      </label>
     <select name="crypto-select" id="crypto-select">
         <option value="">--Choisir la/les crypto(s)--</option>
-        <option value="btc">Bitcoin</option>
-        <option value="eth">etherum</option>
-        <option value="bnb">Binance Coin</option>
-        <option value="ltc">Litecoin</option>
-        <option value="eos">eos</option>
-        <option value="bch">Bitcoin Cash</option>
-        <option value="trx">Tron</option>
-        <option value="trx">trx etherum Chinois</option>
-        <option value="ada">Cardano</option>
-        <option value="xrp">xrp</option>
+        <option value="btc">BTC - Bitcoin</option>
+        <option value="eth">ETH -Etherum</option>
+        <option value="bnb">BNB - Binance Coin</option>
+        <option value="ltc">LTC - Litecoin</option>
+        <option value="eos">EOS</option>
+        <option value="bch">BCH -Bitcoin Cash</option>
+        <option value="trx">TRX - Tron</option>
+        <option value="trx">NEO etherum Chinois</option>
+        <option value="ada">ADA - Cardano</option>
+        <option value="xrp">XRP - Ripple</option>
     </select>
     <button class=""
             type="button"
@@ -22,48 +24,117 @@
   </div>
 
   <div>
-    <form *ngIf="!loading" [formGroup]="userForm"><!--*ngIf="!loading" *ngIf="user"-->
-      <div class="formWithInput">
+    <form [formGroup]="userForm" *ngIf="afterSelectCrypto ;else elseBlockafterSelectCrypto"><!--*ngIf="!loading" *ngIf="user"-->
+      <div class="formWithInput" *ngIf="tableIsVisible
+                                        || isBTCvisible
+                                        || isETHvisible
+                                        || isBNBvisible
+                                        || isNEOvisible
+                                        || isLTCvisible
+                                        || isEOSvisible
+                                        || isBCHvisible
+                                        || isTRXvisible
+                                        || isADAvisible
+                                        || isXRPvisible; else elseBlockafterSelectCrypto">
         <div class="form-group" *ngIf="isBTCvisible">
-          <label for="btc">Bitcoin</label>
-          <i class="fa-solid fa-rectangle-xmark"></i>
+          <div class="labelFormWithInput">
+            <label for="btc">Bitcoin</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-backspace" viewBox="0 0 16 16" (click)="closeBTC()">
+              <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+              <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+            </svg>
+          </div>
           <input type="number" class="form-control" id="btc" formControlName="btc" step="10" min="0" max="1000">
         </div>
         <div class="form-group" *ngIf="isETHvisible">
-          <label for="eth">Etherum</label>
-          <input type="number" class="form-control" id="eth" formControlName="eth">
+          <div class="labelFormWithInput">
+            <label for="eth">Etherum</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-backspace" viewBox="0 0 16 16" (click)="closeETH()">
+              <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+              <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+            </svg>
+          </div>
+          <input type="number" class="form-control" id="eth" formControlName="eth" step="10" min="0" max="1000">
         </div>
         <div class="form-group" *ngIf="isBNBvisible">
-          <label for="bnb">Binance Coin</label>
-          <input type="number" class="form-control" id="bnb" rows="5" formControlName="bnb">
+          <div class="labelFormWithInput">
+            <label for="bnb">Binance Coin</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-backspace" viewBox="0 0 16 16" (click)="closeBNB()">
+              <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+              <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+            </svg>
+          </div>
+          <input type="number" class="form-control" id="bnb" formControlName="bnb" step="10" min="0" max="1000">
         </div>
         <div class="form-group" *ngIf="isLTCvisible">
-          <label for="ltc">Litecoin</label>
-          <input type="number" class="form-control" id="ltc" rows="5" formControlName="ltc">
+          <div class="labelFormWithInput">
+            <label for="ltc">Litecoin</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-backspace" viewBox="0 0 16 16" (click)="closeLTC()">
+              <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+              <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+            </svg>
+          </div>
+          <input type="number" class="form-control" id="ltc" formControlName="ltc" step="10" min="0" max="1000">
         </div>
         <div class="form-group" *ngIf="isEOSvisible">
-          <label for="eos">EOS</label>
-          <input type="number" class="form-control" id="eos" rows="5" formControlName="eos">
+          <div class="labelFormWithInput">
+            <label for="eos">EOS</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-backspace" viewBox="0 0 16 16" (click)="closeEOS()">
+              <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+              <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+            </svg>
+          </div>
+          <input type="number" class="form-control" id="eos" formControlName="eos" step="10" min="0" max="1000">
         </div>
         <div class="form-group" *ngIf="isBCHvisible">
-          <label for="bch">Bitcoin Cash</label>
-          <input type="number" class="form-control" id="bch" rows="5" formControlName="bch">
+          <div class="labelFormWithInput">
+            <label for="bch">Bitcoin Cash</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-backspace" viewBox="0 0 16 16" (click)="closeBCH()">
+              <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+              <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+            </svg>
+          </div>
+          <input type="number" class="form-control" id="bch" formControlName="bch" step="10" min="0" max="1000">
         </div>
         <div class="form-group" *ngIf="isTRXvisible">
-          <label for="trx">Tron</label>
-          <input type="number" class="form-control" id="trx" rows="5" formControlName="trx">
+          <div class="labelFormWithInput">
+            <label for="trx">Tron</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-backspace" viewBox="0 0 16 16" (click)="closeTRX()">
+              <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+              <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+            </svg>
+          </div>
+          <input type="number" class="form-control" id="trx" formControlName="trx" step="10" min="0" max="1000">
         </div>
         <div class="form-group" *ngIf="isNEOvisible">
-          <label for="neo">Neo etherum Chinois</label>
-          <input type="number"a class="form-control" id="neo" rows="5" formControlName="neo">
+          <div class="labelFormWithInput">
+            <label for="neo">Neo Etherum Chinois</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-backspace" viewBox="0 0 16 16" (click)="closeNEO()">
+              <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+              <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+            </svg>
+          </div>
+          <input type="number"a class="form-control" id="neo" formControlName="neo" step="10" min="0" max="1000">
         </div>
         <div class="form-group" *ngIf="isADAvisible">
-          <label for="ada">Cardano</label>
-          <input type="number" class="form-control" id="ada" rows="5" formControlName="ada">
+          <div class="labelFormWithInput">
+            <label for="ada">Cardano</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-backspace" viewBox="0 0 16 16" (click)="closeADA()">
+              <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+              <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+            </svg>
+          </div>
+          <input type="number" class="form-control" id="ada" formControlName="ada" step="10" min="0" max="1000">
         </div>
         <div class="form-group" *ngIf="isXRPvisible">
-          <label for="xrp">XRP</label>
-          <input type="number" class="form-control" id="xrp" rows="5" formControlName="xrp">
+          <div class="labelFormWithInput">
+            <label for="xrp">XRP - Ripple</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-backspace" viewBox="0 0 16 16" (click)="closeXRP()">
+              <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+              <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+            </svg>
+          </div>
+          <input type="number" class="form-control" id="xrp" formControlName="xrp" step="10" min="0" max="1000">
         </div>
         <button (click)="BuyBTCCrytpo()" *ngIf="isXRPvisible
                                                                                       || isADAvisible
@@ -78,12 +149,18 @@
       </div>
 
       <div class="tableIsVisible" *ngIf="tableIsVisible">
-        <h4 class="titleTableRecap">Récapitulatif des Ventes</h4>
+        <div class="labelFormWithInput">
+          <h4 class="titleTableRecap">Récapitulatif des Ventes</h4>
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-backspace" viewBox="0 0 16 16" (click)="onClose()">
+            <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+            <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+          </svg>
+        </div>
         <table class="table">
           <thead class="thead-dark">
             <tr>
               <th>Crypto</th>
-              <th>Montant en crypto</th>
+              <th>Nombre en crypto</th>
               <th>Montant en euros</th>
             </tr>
           </thead>
@@ -91,68 +168,72 @@
             <tr *ngIf="cryptoTabBuy[0] !== 0">
               <td>Bitcoin</td>
               <td>{{ cryptoTabBuy[0] }}</td>
-              <td>{{ BTCSelectedBuy }}</td>
+              <td>{{ BTCSelectedBuy | number : '1.2-2' }}</td>
             </tr>
             <tr *ngIf="cryptoTabBuy[1] !== 0">
               <td>Etherum</td>
               <td>{{ cryptoTabBuy[1] }}</td>
-              <td>{{ ETHSelectedBuy }}</td>
+              <td>{{ ETHSelectedBuy | number : '1.2-2' }}</td>
             </tr>
             <tr *ngIf="cryptoTabBuy[2] !== 0">
               <td>Binance Coin</td>
               <td>{{ cryptoTabBuy[2] }}</td>
-              <td>{{ BNBSelectedBuy }}</td>
+              <td>{{ BNBSelectedBuy | number : '1.2-2' }}</td>
             </tr>
             <tr *ngIf="cryptoTabBuy[3] !== 0">
               <td>Litecoin</td>
               <td>{{ cryptoTabBuy[3] }}</td>
-              <td>{{ LTCSelectedBuy }}</td>
+              <td>{{ LTCSelectedBuy | number : '1.2-2' }}</td>
             </tr>
             <tr *ngIf="cryptoTabBuy[4] !== 0">
               <td>EOS</td>
-              <td>{{ cryptoTabBuy[3] }}</td>
-              <td>{{ EOSSelectedBuy }}</td>
+              <td>{{ cryptoTabBuy[4] }}</td>
+              <td>{{ EOSSelectedBuy | number : '1.2-2' }}</td>
             </tr>
             <tr *ngIf="cryptoTabBuy[5] !== 0">
               <td>Bitcoin Cash</td>
               <td>{{ cryptoTabBuy[5] }}</td>
-              <td>{{ BCHSelectedBuy }}</td>
+              <td>{{ BCHSelectedBuy | number : '1.2-2' }}</td>
             </tr>
             <tr *ngIf="cryptoTabBuy[6] !== 0">
               <td>Tron</td>
               <td>{{ cryptoTabBuy[6] }}</td>
-              <td>{{ TRXSelectedBuy }}</td>
+              <td>{{ TRXSelectedBuy | number : '1.2-2' }}</td>
             </tr>
             <tr *ngIf="cryptoTabBuy[7] !== 0">
               <td>Neo etherum Chinois</td>
               <td>{{ cryptoTabBuy[7] }}</td>
-              <td>{{ NEOSelectedBuy }}</td>
+              <td>{{ NEOSelectedBuy | number : '1.2-2' }}</td>
             </tr>
             <tr *ngIf="cryptoTabBuy[8] !== 0">
               <td>Cardano</td>
               <td>{{ cryptoTabBuy[8] }}</td>
-              <td>{{ ADASelectedBuy }}</td>
+              <td>{{ ADASelectedBuy | number : '1.2-2' }}</td>
             </tr>
             <tr *ngIf="cryptoTabBuy[9] !== 0">
               <td>XRP</td>
               <td>{{ cryptoTabBuy[9] }}</td>
-              <td>{{ XRPSelectedBuy }}</td>
+              <td>{{ XRPSelectedBuy | number : '1.2-2' }}</td>
             </tr>
           </tbody>
         </table>
         <div class="control-buttons">
-          <button type="button" (click)="onSubmit()" [disabled]="userForm.invalid" *ngIf="this.loadingSellCrypto; else otherElseBlock">Valider et Sauvergarder</button>
+          <button type="button" (click)="onSubmit()" [disabled]="userForm.invalid" *ngIf="loadingSellCrypto && !buttonSellAll; else otherElseBlock">Valider et Sauvergarder</button>
+          <button (click)="sellAllCryptos()" *ngIf="buttonSellAll">Suppression du solde du compte</button>
           <ng-template #otherElseBlock>
-            <p>Le montant que vous voulez vendre est supérieur à votre solde, Veuillez le rectifier !</p>
+            <p>{{ messageError }}</p>
           </ng-template>
-          <button type="button" (click)="onClose()">Annuler</button>  
+          <!-- <button type="button" (click)="onClose()">Annuler</button>   -->
         </div>
       </div>
     </form>
+    <ng-template  #elseBlockafterSelectCrypto>
+      <p class="elseBlockafterSelectCrypto">Veuillez Ajouter une crypto pour commencez vos ventes !</p>
+    </ng-template>
+    <div class="toutVendre" *ngIf="isAuth">
+      <button (click)="sellAllTab()">TOUT VENDRE</button>
+    </div>
   </div>
-</div>
-<div class="toutVendre" *ngIf="isAuth">
-  <button (click)="sellAllCryptos()">TOUT VENDRE</button>
 </div>
 </div>
 <ng-template #elseBlock>

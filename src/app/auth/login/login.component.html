@@ -2,7 +2,7 @@
   <form [formGroup]="loginForm" *ngIf="!loading">
     <h1>Se connecter</h1>
     <div class="form-group">
-      <label for="username">Email</label>
+      <label for="username">Username</label>
       <input type="username" class="form-control" id="username" formControlName="username" minlength="6" maxlength="20">
     </div>
     <div class="form-group">
@@ -10,7 +10,7 @@
       <input type="password" class="form-control" id="password" formControlName="password" minlength="6" maxlength="30">
     </div>
     <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="onLogin()">Login</button>
-    <p class="text-danger" *ngIf="errorMsg">{{ errorMsg }}</p>
+    <p class="text-danger" *ngIf="errorMsg">Le mot de passe ou le username sont incorrect, Veuillez Réessayer !</p>
   </form>
 </div>
 

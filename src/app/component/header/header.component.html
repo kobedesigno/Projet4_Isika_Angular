@@ -1,15 +1,14 @@
 <nav class="navbar navbar-expand-lg fixed-top">
-  <div class="container">
     <a class="navbar-brand" href="#">Crypto App</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse right-nav" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" routerLink="acceuil" routerLinkActive="active">Acceuil</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" routerLink="cryptos" routerLinkActive="active">Cryptos</a>
         </li>
         <li class="nav-item">
@@ -21,17 +20,25 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="sell" routerLinkActive="active" *ngIf="isAuth">Vendre</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle d-md-block" routerLink="login" routerLinkActive="active" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Compte</a>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="register" routerLinkActive="active" *ngIf="!isAuth">Inscription</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="login" routerLinkActive="active" *ngIf="!isAuth">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="onLogout()" *ngIf="isAuth">Deconnexion</a>
+        </li>
+        <!--<li class="nav-item dropdown">
+           <a class="nav-link dropdown-toggle" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Compte</a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" routerLink="register" routerLinkActive="active" *ngIf="!isAuth">Inscription</a>
+            <a class="dropdown-item routerLink="register" routerLinkActive="active" *ngIf="!isAuth" >Inscription</a>
             <a class="dropdown-item" routerLink="login" routerLinkActive="active" *ngIf="!isAuth">Connexion</a>
             <a class="dropdown-item" (click)="onLogout()" *ngIf="isAuth">Déconnexion</a>
-          </div>
-        </li>
+          </div> 
+        </li>-->
       </ul>
     </div>
-  </div>
 </nav>
 
 

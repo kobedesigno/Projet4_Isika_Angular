@@ -99,11 +99,7 @@ export class UserProfilComponent implements OnInit {
   }
 
   calculIntermediareUserHad() {
-    console.log(this.BTCUserHadEuro);
-    console.log(this.user.btc);
-    console.log(this.cryptoTabPrice[0]);
-    this.BCHUserHadEuro = this.cryptoTabPrice[0] * this.user.btc;
-    console.log(this.BTCUserHadEuro);
+    this.BCHUserHadEuro = this.cryptoTabPrice[0] * this.user.bch;
     this.XRPUserHadEuro = this.cryptoTabPrice[1] * this.user.xrp;
     this.ADAUserHadEuro = this.cryptoTabPrice[2] * this.user.ada;
     this.NEOUserHadEuro = this.cryptoTabPrice[3] * this.user.neo;
@@ -113,6 +109,16 @@ export class UserProfilComponent implements OnInit {
     this.BNBUserHadEuro = this.cryptoTabPrice[7] * this.user.bnb;
     this.ETHUserHadEuro = this.cryptoTabPrice[8] * this.user.eth;
     this.BTCUserHadEuro = this.cryptoTabPrice[9] * this.user.btc;
+    console.log(this.BTCUserHadEuro
+      + ' - ' + this.ETHUserHadEuro
+      + ' - '+ this.BNBUserHadEuro
+      + ' - '+ this.LTCUserHadEuro
+      + ' - '+ this.EOSUserHadEuro
+      + ' - '+ this.BCHUserHadEuro
+      + ' - '+ this.TRXUserHadEuro
+      + ' - '+ this.NEOUserHadEuro
+      + ' - '+ this.ADAUserHadEuro
+      + ' - '+ this.XRPUserHadEuro);
     this.montantTotalPossede = this.BTCUserHadEuro
     + this.ETHUserHadEuro
     + this.BNBUserHadEuro

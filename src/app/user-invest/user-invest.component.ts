@@ -29,6 +29,7 @@ export class UserInvestComponent implements OnInit {
   errorMsg: string;
   
 
+  afterSelectCrypto: boolean;
   
   cryptoTabPrice: number[] = [];
 
@@ -78,16 +79,6 @@ export class UserInvestComponent implements OnInit {
   ADASelectedBuyResult: number;
   XRPSelectedBuyResult: number;
   cryptoTabBuy: number[] = [];
-  // btcObject: Object[];
-  // ethObject: Object[];
-  // bnbTab: Object[];
-  // ltcTab: Object[];
-  // eosTab: Object[];
-  // bchObject: any;
-  // trxTab: Object[];
-  // neoTab: Object[];
-  // adaTab: Object[];
-  // xrpTab: Object[];
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -163,7 +154,7 @@ export class UserInvestComponent implements OnInit {
     console.log(this.BTCUserHadEuro);
     console.log(this.user.btc);
     console.log(this.cryptoTabPrice[0]);
-    this.BCHUserHadEuro = this.cryptoTabPrice[0] * this.user.btc;
+    this.BCHUserHadEuro = this.cryptoTabPrice[0] * this.user.bch;
     console.log(this.BTCUserHadEuro);
     this.XRPUserHadEuro = this.cryptoTabPrice[1] * this.user.xrp;
     this.ADAUserHadEuro = this.cryptoTabPrice[2] * this.user.ada;
@@ -207,78 +198,197 @@ export class UserInvestComponent implements OnInit {
     console.log(cryptoSelectedOpen);
     switch (cryptoSelectedOpen) {
       case 'btc':
+        this.afterSelectCrypto = true;
         this.isBTCvisible = true;
         break;
       case 'eth':
+        this.afterSelectCrypto = true;
         this.isETHvisible = true;
         break;
       case 'bnb':
+        this.afterSelectCrypto = true;
         this.isBNBvisible = true;
         break;
       case 'ltc':
+        this.afterSelectCrypto = true;
         this.isLTCvisible = true;
         break;
       case 'eos':
+        this.afterSelectCrypto = true;
         this.isEOSvisible = true;
         break;
       case 'bch':
+        this.afterSelectCrypto = true;
         this.isBCHvisible = true;
         break;
       case 'trx':
+        this.afterSelectCrypto = true;
         this.isTRXvisible = true;
         break;
       case 'neo':
+        this.afterSelectCrypto = true;
         this.isNEOvisible = true;
         break;
       case 'ada':
+        this.afterSelectCrypto = true;
         this.isADAvisible = true;
         break;
       case 'xrp':
+        this.afterSelectCrypto = true;
         this.isXRPvisible = true;
         break;
+      default:
+        this.afterSelectCrypto = false;
     }
+  }
+
+  closeBTC() {
+    this.isBTCvisible = false;
+    this.BTCSelectedBuy = 0;
+    this.cryptoTabBuy[0] = 0;
+    this.userForm.patchValue({
+      btc: 0
+    });
+    this.closeTabisVisible();
+  }
+  closeETH() {
+    this.isETHvisible = false;
+    this.ETHSelectedBuy = 0;
+    this.cryptoTabBuy[1] = 0;
+    this.userForm.patchValue({
+      eth: 0
+    });
+    this.closeTabisVisible();
+  }
+  closeBNB() {
+    this.isBNBvisible = false;
+    this.BNBSelectedBuy = 0;
+    this.cryptoTabBuy[2] = 0;
+    this.userForm.patchValue({
+      bnb: 0
+    });
+    this.closeTabisVisible();
+  }
+  closeLTC() {
+    this.isLTCvisible = false;
+    this.LTCSelectedBuy = 0;
+    this.cryptoTabBuy[3] = 0;
+    this.userForm.patchValue({
+      ltc: 0
+    });
+    this.closeTabisVisible();
+  }
+  closeEOS() {
+    this.isEOSvisible = false;
+    this.EOSSelectedBuy = 0;
+    this.cryptoTabBuy[4] = 0;
+    this.userForm.patchValue({
+      eos: 0
+    });
+    this.closeTabisVisible();
+  }
+  closeBCH() {
+    this.isBCHvisible = false;
+    this.BCHSelectedBuy = 0;
+    this.cryptoTabBuy[5] = 0;
+    this.userForm.patchValue({
+      bch: 0
+    });
+    this.closeTabisVisible();
+  }
+  closeTRX() {
+    this.isTRXvisible = false;
+    this.TRXSelectedBuy = 0;
+    this.cryptoTabBuy[6] = 0;
+    this.userForm.patchValue({
+      trx: 0
+    });
+    this.closeTabisVisible();
+  }
+  closeNEO() {
+    this.isNEOvisible = false;
+    this.NEOSelectedBuy = 0;
+    this.cryptoTabBuy[7] = 0;
+    this.userForm.patchValue({
+      neo: 0
+    });
+    this.closeTabisVisible();
+  }
+  closeADA() {
+    this.isADAvisible = false;
+    this.ADASelectedBuy = 0;
+    this.cryptoTabBuy[8] = 0;
+    this.userForm.patchValue({
+      ada: 0
+    });
+    this.closeTabisVisible();
+  }
+  closeXRP() {
+    this.isXRPvisible = false;
+    this.XRPSelectedBuy = 0;
+    this.cryptoTabBuy[9] = 0;
+    this.userForm.patchValue({
+      xrp: 0
+    });
+    this.closeTabisVisible();
+  }
+
+  closeTabisVisible(){
+    if (this.cryptoTabBuy[0] == 0
+      && this.cryptoTabBuy[1] == 0
+      && this.cryptoTabBuy[2] == 0
+      && this.cryptoTabBuy[3] == 0
+      && this.cryptoTabBuy[4] == 0
+      && this.cryptoTabBuy[5] == 0
+      && this.cryptoTabBuy[6] == 0
+      && this.cryptoTabBuy[7] == 0
+      && this.cryptoTabBuy[8] == 0
+      && this.cryptoTabBuy[9] == 0) {
+        this.tableIsVisible = false;
+      }
   }
 
   BuyBTCCrytpo() {
    
+      this.cryptoTabBuy = [];
       this.BTCSelectedBuy = this.userForm.get('btc').value;
-      let BTCSelectedBuyResult = this.userForm.get('btc').value / (this.cryptoTabPrice[0]);
+      let BTCSelectedBuyResult = this.userForm.get('btc').value / (this.cryptoTabPrice[9]);
       this.cryptoTabBuy.push(BTCSelectedBuyResult);
 
       this.ETHSelectedBuy = this.userForm.get('eth').value
-      let ETHSelectedBuyResult = this.userForm.get('eth').value / (this.cryptoTabPrice[1]);
+      let ETHSelectedBuyResult = this.userForm.get('eth').value / (this.cryptoTabPrice[8]);
       this.cryptoTabBuy.push(ETHSelectedBuyResult);
 
       this.BNBSelectedBuy = this.userForm.get('bnb').value
-      let BNBSelectedBuyResult = this.userForm.get('bnb').value / (this.cryptoTabPrice[2]);
+      let BNBSelectedBuyResult = this.userForm.get('bnb').value / (this.cryptoTabPrice[7]);
       this.cryptoTabBuy.push(BNBSelectedBuyResult);
 
       this.LTCSelectedBuy = this.userForm.get('ltc').value
-      let LTCSelectedBuyResult = this.userForm.get('ltc').value / (this.cryptoTabPrice[3]);
+      let LTCSelectedBuyResult = this.userForm.get('ltc').value / (this.cryptoTabPrice[6]);
       this.cryptoTabBuy.push(LTCSelectedBuyResult);
 
       this.EOSSelectedBuy = this.userForm.get('eos').value
-      let EOSSelectedBuyResult = this.userForm.get('eos').value / (this.cryptoTabPrice[4]);
+      let EOSSelectedBuyResult = this.userForm.get('eos').value / (this.cryptoTabPrice[5]);
       this.cryptoTabBuy.push(EOSSelectedBuyResult);
 
       this.BCHSelectedBuy = this.userForm.get('bch').value
-      let BCHSelectedBuyResult = this.userForm.get('bch').value / (this.cryptoTabPrice[5]);
+      let BCHSelectedBuyResult = this.userForm.get('bch').value / (this.cryptoTabPrice[0]);
       this.cryptoTabBuy.push(BCHSelectedBuyResult);
 
       this.TRXSelectedBuy = this.userForm.get('trx').value
-      let TRXSelectedBuyResult = this.userForm.get('trx').value / (this.cryptoTabPrice[6]);
+      let TRXSelectedBuyResult = this.userForm.get('trx').value / (this.cryptoTabPrice[4]);
       this.cryptoTabBuy.push(TRXSelectedBuyResult);
 
       this.NEOSelectedBuy = this.userForm.get('neo').value
-      let NEOSelectedBuyResult = this.userForm.get('neo').value / (this.cryptoTabPrice[7]);
+      let NEOSelectedBuyResult = this.userForm.get('neo').value / (this.cryptoTabPrice[3]);
       this.cryptoTabBuy.push(NEOSelectedBuyResult);
 
       this.ADASelectedBuy = this.userForm.get('ada').value
-      let ADASelectedBuyResult = this.userForm.get('ada').value / (this.cryptoTabPrice[8]);
+      let ADASelectedBuyResult = this.userForm.get('ada').value / (this.cryptoTabPrice[2]);
       this.cryptoTabBuy.push(ADASelectedBuyResult);
 
       this.XRPSelectedBuy = this.userForm.get('xrp').value
-      let XRPSelectedBuyResult = this.userForm.get('xrp').value / (this.cryptoTabPrice[9]);
+      let XRPSelectedBuyResult = this.userForm.get('xrp').value / (this.cryptoTabPrice[1]);
       this.cryptoTabBuy.push(XRPSelectedBuyResult);
 
       this.tableIsVisible = true;
@@ -290,34 +400,25 @@ export class UserInvestComponent implements OnInit {
 
 
   // Pour initier les valeurs dans les input avec les valeur de l'utilisateur (non utile ?)
-  initModifyForm(user: User) {
-    this.userForm = this.formBuilder.group({
-      montantDepose: [this.user.montantDepose],
-      btc: [this.user.btc],
-      eth: [this.user.eth],
-      bnb: [this.user.bnb],
-      ltc: [this.user.ltc],
-      eos: [this.user.eos],
-      bch: [this.user.bch],
-      trx: [this.user.trx],
-      neo: [this.user.neo],
-      ada: [this.user.ada],
-      xrp: [this.user.xrp],
-    });
-  }
+  // initModifyForm(user: User) {
+  //   this.userForm = this.formBuilder.group({
+  //     montantDepose: [this.user.montantDepose],
+  //     btc: [this.user.btc],
+  //     eth: [this.user.eth],
+  //     bnb: [this.user.bnb],
+  //     ltc: [this.user.ltc],
+  //     eos: [this.user.eos],
+  //     bch: [this.user.bch],
+  //     trx: [this.user.trx],
+  //     neo: [this.user.neo],
+  //     ada: [this.user.ada],
+  //     xrp: [this.user.xrp],
+  //   });
+  // }
 
   onSubmit() {
     this.loading = true;
     const newUser = new User();
-    console.log(this.BTCSelectedBuyResult);
-    console.log(this.cryptoTabBuy[0]);
-    console.log(this.cryptoTabBuy[1]);
-    console.log(this.ETHSelectedBuyResult);
-    console.log(this.BNBSelectedBuyResult);
-    console.log(newUser.ltc);
-    console.log( newUser.eos);
-    console.log(this.user.btc)
-
 
     newUser.btc = this.cryptoTabBuy[0] + this.user.btc;
     newUser.eth = this.cryptoTabBuy[1] + this.user.eth;
