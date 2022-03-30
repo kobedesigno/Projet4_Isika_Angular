@@ -7,14 +7,12 @@ import { AuthService } from '../_services/auth.service';
 import { CryptosService } from '../_services/cryptos.service';
 import { UsersService } from '../_services/users.service';
 import { Crypto } from '../models/Crypto.model';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   selector: 'app-user-invest',
   templateUrl: './user-invest.component.html',
-  styleUrls: ['./user-invest.component.scss'],
-  providers: [NgbModalConfig, NgbModal]
+  styleUrls: ['./user-invest.component.scss']
 })
 export class UserInvestComponent implements OnInit {
 
@@ -96,17 +94,8 @@ export class UserInvestComponent implements OnInit {
               private router: Router,
               private crypto: CryptosService,
               private users: UsersService,
-              private auth: AuthService,
-              config: NgbModalConfig, 
-              private modalService: NgbModal) { 
+              private auth: AuthService) {}
 
-    config.backdrop = 'static';
-    config.keyboard = false;
-  }
-
-  open(content) {
-    this.modalService.open(content);
-  }
 
   ngOnInit() {
     this.userCall(); 

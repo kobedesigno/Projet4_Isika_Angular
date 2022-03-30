@@ -8,13 +8,11 @@ import { AuthService } from '../_services/auth.service';
 import { CryptosService } from '../_services/cryptos.service';
 import { UsersService } from '../_services/users.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-sell',
   templateUrl: './user-sell.component.html',
-  styleUrls: ['./user-sell.component.scss'],
-  providers: [NgbModalConfig, NgbModal]
+  styleUrls: ['./user-sell.component.scss']
 })
 export class UserSellComponent implements OnInit {
 
@@ -87,16 +85,7 @@ export class UserSellComponent implements OnInit {
               private route: ActivatedRoute,
               private auth: AuthService,
               private crypto: CryptosService,
-              private router: Router,
-              config: NgbModalConfig, 
-              private modalService: NgbModal) {
-    config.backdrop = 'static';
-    config.keyboard = false;
-              }
-
-  open(content) {
-    this.modalService.open(content);
-  }
+              private router: Router) {}
 
   ngOnInit() {
     this.userCall();
