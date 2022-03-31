@@ -143,20 +143,16 @@ export class UserProfilComponent implements OnInit {
     this.router.navigate(['sell']);
   }
 
-  // onDelete() {
-  //   this.loading = true;
-  //   this.users.deleteUser(this.user._id).then(
-  //     (response: { message: string }) => {
-  //       console.log(response.message);
-  //       this.loading = false;
-  //       this.router.navigate(['/cryptos']);
-  //     }
-  //   ).catch(
-  //     (error) => {
-  //       this.loading = false;
-  //       this.errorMessage = error.message;
-  //       console.error(error);
-  //     }
-  //   );
-  // }
+  cryptoTabImg = [
+    './assets/images/bch.png',
+    './assets/images/xrp.png',
+    './assets/images/ada.png',
+    './assets/images/neo.png',
+    './assets/images/trx.png',
+    './assets/images/eos.png',
+    './assets/images/ltc.png',
+    './assets/images/bnb.png',
+    './assets/images/eth.png',
+    './assets/images/btc.png',
+  ]
 }

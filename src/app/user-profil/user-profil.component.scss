@@ -91,6 +91,9 @@ background-color: #282d32;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
 }
+.crypto-list-item {
+    color: white;
+}
 
 .control-buttons {
     background-color: white;
@@ -118,6 +121,11 @@ button {
     transition: transform 80ms ease-in;
 }
 
+.imageCrypto {
+    width: 35px;
+    height: 35px;
+  }
+
 .control-buttons:first-child {
     background-color: #8f2a19
 }
@@ -125,4 +133,7 @@ button {
 .ng-template {
  font-size: 25px;
  text-align: center;
+}
+.thead-light {
+    color: #FFFFFF
 }

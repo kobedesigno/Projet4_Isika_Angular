@@ -16,18 +16,80 @@
     <br>
       <div class="montantInvestisDetails" *ngIf="user.montantDepose !== 0">
         <p>Vous possèdez actuellement :</p>
-        <ul>
-          <li *ngIf="user.btc !== 0">{{ user.btc }} <span class="crypto">Bitcoin</span> soit {{ BTCUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
-          <li *ngIf="user.eth !== 0">{{ user.eth }} Etherum  soit  {{ ETHUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
-          <li *ngIf="user.bnb !== 0">{{ user.bnb }} Binance Coin  soit  {{ BNBUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
-          <li *ngIf="user.ltc !== 0">{{ user.ltc }} Litecoin  soit  {{ LTCUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
-          <li *ngIf="user.eos !== 0">{{ user.eos }} Eos  soit  {{ EOSUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
-          <li *ngIf="user.bch !== 0">{{ user.bch }} Bitcoin Cash  soit  {{ BCHUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
-          <li *ngIf="user.trx !== 0">{{ user.trx }} Tron  soit  {{ TRXUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
-          <li *ngIf="user.neo !== 0">{{ user.neo }} Neo Etherum chinois  soit  {{ NEOUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
-          <li *ngIf="user.ada !== 0">{{ user.ada }} Cardano  soit  {{ ADAUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</li>
-          <li *ngIf="user.xrp !== 0">{{ user.xrp }} xrp  soit  {{ XRPUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}} </li>
-        </ul>
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th>Logo</th>
+                <th>Crypto</th>
+                <th>Nombre détenu</th>
+                <th>Argent détenu</th>
+              </tr>
+            </thead>
+            <tbody class="crypto-list-item">
+              <tr *ngIf="user.bch !== 0">
+                <td><img class="imageCrypto" [src]="cryptoTabImg[0]"></td>
+                <td>Bitcoin cash</td>
+                <td>{{ user.bch }}</td>
+                <td>{{ BCHUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
+              </tr>
+              <tr *ngIf="user.xrp !== 0">
+                <td><img class="imageCrypto" [src]="cryptoTabImg[1]"></td>
+                <td>XRP</td>
+                <td>{{ user.xrp }}</td>
+                <td>{{ XRPUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
+              </tr>
+              <tr *ngIf="user.ada !== 0">
+                <td><img class="imageCrypto" [src]="cryptoTabImg[2]"></td>
+                <td>Cardano</td>
+                <td>{{ user.ada }}</td>
+                <td>{{ ADAUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
+              </tr>
+              <tr *ngIf="user.neo !== 0">
+                <td><img class="imageCrypto" [src]="cryptoTabImg[3]"></td>
+                <td>Neo Etherum chinois</td>
+                <td>{{ user.neo }}</td>
+                <td>{{ NEOUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
+              </tr>
+              <tr *ngIf="user.trx !== 0">
+                <td><img class="imageCrypto" [src]="cryptoTabImg[4]"></td>
+                <td>Tron</td>
+                <td>{{ user.trx }}</td>
+                <td>{{ TRXUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
+              </tr>
+              <tr *ngIf="user.eos !== 0">
+                <td><img class="imageCrypto" [src]="cryptoTabImg[5]"></td>
+                <td>Eos</td>
+                <td>{{ user.eos }}</td>
+                <td>{{ EOSUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
+              </tr>
+              <tr *ngIf="user.ltc !== 0">
+                <td><img class="imageCrypto" [src]="cryptoTabImg[6]"></td>
+                <td>Litecoin</td>
+                <td>{{ user.ltc }}</td>
+                <td>{{ LTCUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
+              </tr>
+              <tr *ngIf="user.bnb !== 0">
+                <td><img class="imageCrypto" [src]="cryptoTabImg[7]"></td>
+                <td>Binance Coin</td>
+                <td>{{ user.bnb }}</td>
+                <td>{{ BNBUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
+              </tr>
+              <tr *ngIf="user.bnb !== 0">
+                <td><img class="imageCrypto" [src]="cryptoTabImg[8]"></td>
+                <td>Etherum</td>
+                <td>{{ user.eth }}</td>
+                <td>{{ ETHUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
+              </tr>
+              <tr *ngIf="user.eth !== 0">
+                <td><img class="imageCrypto" [src]="cryptoTabImg[9]"></td>
+                <td>Bitcoin</td>
+                <td>{{ user.btc }}</td>
+                <td>{{ BTCUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>  
   </div>
     <ng-template class="ng-template" #elseBlock>
