@@ -75,7 +75,7 @@
                 <td>{{ user.bnb }}</td>
                 <td>{{ BNBUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
               </tr>
-              <tr *ngIf="user.bnb !== 0">
+              <tr *ngIf="user.eth !== 0">
                 <td><img class="imageCrypto" [src]="cryptoTabImg[8]"></td>
                 <td>Etherum</td>
                 <td>{{ user.eth }}</td>
