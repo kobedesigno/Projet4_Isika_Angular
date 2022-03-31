@@ -4,11 +4,10 @@ body {
   font-family: "Source Sans Pro", sans-serif ;
   letter-spacing: 0.1em;
   margin: 0;
-  white-space: pre-line;
+  padding: 0;
+  top: 0;
+
 }
 
-html, body { height: 100%; }
-
-mat-spinner {
-  margin: auto;
-}
+html, body { height: 100%;
+width: 100%; }
