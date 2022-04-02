@@ -10,7 +10,7 @@
   <div class="cryptoDescriptionAll" *ngFor="let crypto of cryptos ; let i = index" (click)="onClickCrypto(crypto.cryptoName)">
     <div class="nameAndLogo">
         <div>
-            <img class="imageCrypto" [src]="cryptoTabImg[i]">
+            <img class="imageCrypto" src="https://www.cryptocompare.com/{{ crypto.imageUrl }}">
         </div>
         <div>
             <p class="nameCrypto">{{ crypto.cryptoName | uppercase}}</p>

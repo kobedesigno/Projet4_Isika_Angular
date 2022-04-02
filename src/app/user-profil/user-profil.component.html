@@ -28,61 +28,61 @@
             </thead>
             <tbody class="crypto-list-item">
               <tr *ngIf="user.bch !== 0">
-                <td><img class="imageCrypto" [src]="cryptoTabImg[0]"></td>
+                <td><img class="imageCrypto" src="https://www.cryptocompare.com/media/37746245/bch.png"></td>
                 <td>Bitcoin cash</td>
                 <td>{{ user.bch }}</td>
                 <td>{{ BCHUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
               </tr>
               <tr *ngIf="user.xrp !== 0">
-                <td><img class="imageCrypto" [src]="cryptoTabImg[1]"></td>
+                <td><img class="imageCrypto" src="https://www.cryptocompare.com/media/38553096/xrp.png"></td>
                 <td>XRP</td>
                 <td>{{ user.xrp }}</td>
                 <td>{{ XRPUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
               </tr>
               <tr *ngIf="user.ada !== 0">
-                <td><img class="imageCrypto" [src]="cryptoTabImg[2]"></td>
+                <td><img class="imageCrypto" src="https://www.cryptocompare.com/media/37746235/ada.png"></td>
                 <td>Cardano</td>
                 <td>{{ user.ada }}</td>
                 <td>{{ ADAUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
               </tr>
               <tr *ngIf="user.neo !== 0">
-                <td><img class="imageCrypto" [src]="cryptoTabImg[3]"></td>
+                <td><img class="imageCrypto" src="https://www.cryptocompare.com/media/37746892/neo.png"></td>
                 <td>Neo Etherum chinois</td>
                 <td>{{ user.neo }}</td>
                 <td>{{ NEOUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
               </tr>
               <tr *ngIf="user.trx !== 0">
-                <td><img class="imageCrypto" [src]="cryptoTabImg[4]"></td>
+                <td><img class="imageCrypto" src="https://www.cryptocompare.com/media/37746879/trx.png"></td>
                 <td>Tron</td>
                 <td>{{ user.trx }}</td>
                 <td>{{ TRXUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
               </tr>
               <tr *ngIf="user.eos !== 0">
-                <td><img class="imageCrypto" [src]="cryptoTabImg[5]"></td>
+                <td><img class="imageCrypto" src="https://www.cryptocompare.com/media/37746349/eos.png"></td>
                 <td>Eos</td>
                 <td>{{ user.eos }}</td>
                 <td>{{ EOSUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
               </tr>
               <tr *ngIf="user.ltc !== 0">
-                <td><img class="imageCrypto" [src]="cryptoTabImg[6]"></td>
+                <td><img class="imageCrypto" src="https://www.cryptocompare.com/media/37746243/ltc.png"></td>
                 <td>Litecoin</td>
                 <td>{{ user.ltc }}</td>
                 <td>{{ LTCUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
               </tr>
               <tr *ngIf="user.bnb !== 0">
-                <td><img class="imageCrypto" [src]="cryptoTabImg[7]"></td>
+                <td><img class="imageCrypto" src="https://www.cryptocompare.com/media/37746880/bnb.png"></td>
                 <td>Binance Coin</td>
                 <td>{{ user.bnb }}</td>
                 <td>{{ BNBUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
               </tr>
               <tr *ngIf="user.eth !== 0">
-                <td><img class="imageCrypto" [src]="cryptoTabImg[8]"></td>
+                <td><img class="imageCrypto" src="https://www.cryptocompare.com/media/37746238/eth.png"></td>
                 <td>Etherum</td>
                 <td>{{ user.eth }}</td>
                 <td>{{ ETHUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2'}}</td>
               </tr>
-              <tr *ngIf="user.eth !== 0">
-                <td><img class="imageCrypto" [src]="cryptoTabImg[9]"></td>
+              <tr *ngIf="user.btc !== 0">
+                <td><img class="imageCrypto" src="https://www.cryptocompare.com/media/37746251/btc.png"></td>
                 <td>Bitcoin</td>
                 <td>{{ user.btc }}</td>
                 <td>{{ BTCUserHadEuro | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
@@ -90,7 +90,8 @@
             </tbody>
           </table>
         </div>
-      </div>  
+      </div> 
+    </div>
   </div>
     <ng-template class="ng-template" #elseBlock>
       <p>Vous n'avez fait aucun achat pour le moment</p>

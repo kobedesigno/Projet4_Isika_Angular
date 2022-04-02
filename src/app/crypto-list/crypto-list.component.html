@@ -16,9 +16,9 @@
             <th>Change (heure)</th>
           </tr>
         </thead>
-        <tbody class="crypto-list-item" *ngFor="let crypto of cryptos; let i = index" (click)="onClickCrypto(crypto.cryptoName)">
+        <tbody class="crypto-list-item" *ngFor="let crypto of cryptos" (click)="onClickCrypto(crypto.cryptoName)">
           <tr>
-            <td><img class="imageCrypto" [src]="cryptoTabImg[i]"></td>
+            <td><img class="imageCrypto" src="https://www.cryptocompare.com/{{ crypto.imageUrl }}"></td>
             <td>{{ crypto.cryptoName | uppercase }}</td>
             <td>{{ crypto.price | number : '1.2-2' }}</td>
             <td>{{ crypto.totalVolume24H | number : '1.2-2' }}</td>
