@@ -221,17 +221,17 @@
           <button type="button" (click)="onSubmit()" [disabled]="userForm.invalid" *ngIf="loadingSellCrypto && !buttonSellAll; else otherElseBlock">Valider et Sauvergarder</button>
           <button (click)="sellAllCryptos()" *ngIf="buttonSellAll">Suppression du solde du compte</button>
           <ng-template #otherElseBlock>
-            <p>{{ messageError }}</p>
+            <p *ngIf="BooleanSellAll">{{ messageError }}</p>
           </ng-template>
           <!-- <button type="button" (click)="onClose()">Annuler</button>   -->
         </div>
       </div>
     </form>
     <ng-template  #elseBlockafterSelectCrypto>
-      <p class="elseBlockafterSelectCrypto">Veuillez Ajouter une crypto pour commencez vos ventes !</p>
+      <p class="elseBlockafterSelectCrypto">Veuillez Ajouter une crypto pour commencer vos ventes !</p>
     </ng-template>
     <div class="toutVendre" *ngIf="isAuth">
-      <button (click)="sellAllTab()">TOUT VENDRE</button>
+      <button  (click)="sellAllTab()">TOUT VENDRE</button>
     </div>
   </div>
 </div>
