@@ -40,16 +40,16 @@ export class CryptoListComponent implements OnInit {
   }
 
   cryptoTabImg = [
-    './assets/images/bch.png',
-    './assets/images/xrp.png',
-    './assets/images/ada.png',
-    './assets/images/neo.png',
-    './assets/images/trx.png',
-    './assets/images/eos.png',
-    './assets/images/ltc.png',
-    './assets/images/bnb.png',
-    './assets/images/eth.png',
-    './assets/images/btc.png',
+    '../assets/images/bch.png',
+    '../assets/images/xrp.png',
+    '../assets/images/ada.png',
+    '../assets/images/neo.png',
+    '../assets/images/trx.png',
+    '../assets/images/eos.png',
+    '../assets/images/ltc.png',
+    '../assets/images/bnb.png',
+    '../assets/images/eth.png',
+    '../assets/images/btc.png',
   ]
 
 }
