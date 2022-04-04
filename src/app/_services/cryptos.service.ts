@@ -27,15 +27,17 @@ export class CryptosService {
     );
   }
   getCryptosByName(cryptoName: string) {
-    this.http.get('https://isikaprojet4-cryptoapp-n-s.herokuapp.com/api/cryptos/cryptoName/' + cryptoName).subscribe(
+    return new Promise((resolve, reject) => {
+      this.http.get('https://isikaprojet4-cryptoapp-n-s.herokuapp.com/api/cryptos/cryptoName/' + cryptoName).subscribe(
       (cryptos: Crypto[]) => {
-        this.cryptos$.next(cryptos);
+        resolve(cryptos);
       },
       (error) => {
-        this.cryptos$.next([]);
-        console.error(error);
+        reject(error);
       }
     );
+    })
+    
   }
   getCryptosByNameDate(cryptoName: string, cryptoDate: Date) {
     this.http.get('https://isikaprojet4-cryptoapp-n-s.herokuapp.com/api/cryptos/dateName/'+ cryptoDate +'/' + cryptoName).subscribe(

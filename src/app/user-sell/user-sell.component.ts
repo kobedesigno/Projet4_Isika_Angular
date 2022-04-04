@@ -407,31 +407,31 @@ export class UserSellComponent implements OnInit {
     if (this.user.btc < this.cryptoTabBuy[0]) {
       this.loadingSellCrypto = false;
       this.BooleanSellAll = true;
-      this.messageError = "Le montant de BTC que vous voulez vendre est supérieure à celui que vous détenez!"
+      this.messageError = "Le montant de BTC que vous voulez vendre est supérieur à celui que vous détenez!"
     } else if (this.user.eth < this.cryptoTabBuy[1]) {
       this.loadingSellCrypto = false;
       this.BooleanSellAll = true;
-      this.messageError = "Le montant de ETH que vous voulez vendre est supérieure à celui que vous détenez!"
+      this.messageError = "Le montant de ETH que vous voulez vendre est supérieur à celui que vous détenez!"
     } else if (this.user.ltc < this.cryptoTabBuy[3]) {
       this.loadingSellCrypto = false;
       this.BooleanSellAll = true;
-      this.messageError = "Le montant de LTC que vous voulez vendre est supérieure à celui que vous détenez!"
+      this.messageError = "Le montant de LTC que vous voulez vendre est supérieur à celui que vous détenez!"
     } else if (this.user.bnb < this.cryptoTabBuy[2]) {
       this.loadingSellCrypto = false;
       this.BooleanSellAll = true;
-      this.messageError = "Le montant de BNB que vous voulez vendre est supérieure à celui que vous détenez!"
+      this.messageError = "Le montant de BNB que vous voulez vendre est supérieur à celui que vous détenez!"
     } else if (this.user.eos < this.cryptoTabBuy[4]) {
       this.loadingSellCrypto = false;
       this.BooleanSellAll = true;
-      this.messageError = "Le montant de EOS que vous voulez vendre est supérieure à celui que vous détenez!"
+      this.messageError = "Le montant de EOS que vous voulez vendre est supérieur à celui que vous détenez!"
     } else if (this.user.bch < this.cryptoTabBuy[5]) {
       this.loadingSellCrypto = false;
       this.BooleanSellAll = true;
-      this.messageError = "Le montant de BCH que vous voulez vendre est supérieure à celui que vous détenez!"
+      this.messageError = "Le montant de BCH que vous voulez vendre est supérieur à celui que vous détenez!"
     } else if (this.user.trx < this.cryptoTabBuy[6]) {
       this.loadingSellCrypto = false;
       this.BooleanSellAll = true;
-      this.messageError = "Le montant de TRX que vous voulez vendre est supérieure à celui que vous détenez!"
+      this.messageError = "Le montant de TRX que vous voulez vendre est supérieur à celui que vous détenez!"
     } else if (this.user.neo < this.cryptoTabBuy[7]) {
       this.loadingSellCrypto = false;
       this.BooleanSellAll = true;
@@ -439,11 +439,11 @@ export class UserSellComponent implements OnInit {
     } else if (this.user.ada < this.cryptoTabBuy[8]) {
       this.loadingSellCrypto = false;
       this.BooleanSellAll = true;
-      this.messageError = "Le montant de ADA que vous voulez vendre est supérieure à celui que vous détenez!"
+      this.messageError = "Le montant de ADA que vous voulez vendre est supérieur à celui que vous détenez!"
     } else if (this.user.xrp < this.cryptoTabBuy[9]) {
       this.loadingSellCrypto = false;
       this.BooleanSellAll = true;
-      this.messageError = "Le montant de XRP que vous voulez vendre est supérieure à celui que vous détenez!"
+      this.messageError = "Le montant de XRP que vous voulez vendre est supérieur à celui que vous détenez!"
     } else {
       this.loadingSellCrypto = true
       this.BooleanSellAll = true;

@@ -1,13 +1,47 @@
-<div class="crypto-name" *ngIf="!loading && cryptos.length  > 0">
-  <div class="crypto-name-item" *ngFor="let crypto of cryptos">
+
     <div class="crypto-container" *ngIf="!loading">
-      <img [src]="crypto?.imageUrl" alt="">
       <div class="crypto-info">
-        <h1 class="crypto-name">{{ crypto?.cryptoName }}</h1>
+        <div class="valeurUnitaire" >
+          <img src="https://www.cryptocompare.com/{{ cryptoTabimageUrl[cryptoTabimageUrl.length - 1] }}" alt="">
+          <div class="crypto-name">
+            <h1 class="crypto-name-title">{{ cryptoTabName[cryptoTabName.length - 1] }} :</h1>
+            <h2>{{ CompleteNameCrypto }}</h2>
+          </div>
+          <div class="crypto-price">
+            <h1>Prix : </h1>
+            <h2 class="price">{{ cryptoTabPrice[cryptoTabPrice.length - 1] | currency:'EUR':'symbol':'1.2-2' }}</h2>
+          </div>
       </div>
-    </div>
-  </div>
-</div>
-<div class="crypto-container" *ngIf="!loading">
-  <button mat-raised-button (click)="onBack()">BACK</button>
-</div>
+      <div class="valeurUnitaire">
+        <div class="crypto-volume">
+          <h4>Volume (24h) : </h4>
+          <p class="volume">{{ cryptoTabVolume[cryptoTabVolume.length - 1] | currency:'EUR':'symbol':'1.2-2' }}</p>
+        </div>
+        <div class="crypto-topTierVolume">
+          <h4>Top Tier Volume : </h4>
+          <p class="topTierVolume">{{ cryptoTabtopTierVolume24Hour[cryptoTabtopTierVolume24Hour.length - 1] | currency:'EUR':'symbol':'1.2-2' }}</p>
+        </div>
+        <div class="crypto-marketCap">
+          <h4>Market Cap : </h4>
+          <p class="marketCap">{{ cryptoTabMKTCAP[cryptoTabMKTCAP.length - 1] | currency:'EUR':'symbol':'1.2-2' }}</p>
+        </div>
+        <div class="crypto-change">
+          <h4>Change : </h4>
+          <p class="change">{{ cryptoTabChange[cryptoTabChange.length - 1] | number :'1.2-2' }}%</p>
+        </div>
+        </div>
+        <div class="graphique">
+          <h1>Evolution</h1>
+          <p>(depuis le 11/03/2020)</p>
+          <div>
+            <canvas baseChart 
+            [datasets]="dataPrice"
+            [labels]="labelsDate"
+            [type]="ChartType"></canvas>
+            <!-- <button (click)="ngAfterViewInit">letsgo</button> -->
+            <!-- <canvas id="myChart" width="700" height="250" #mychart></canvas> -->
+          </div>
+        </div>
+      </div>
+      </div>
+

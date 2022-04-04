@@ -20,6 +20,13 @@ import { AuthInterceptor } from './_interceptors/auth-interceptor';
 import { FooterComponent } from './component/footer/footer.component';
 import { AcceuilComponent } from './acceuil/acceuil.component';
 
+// import { CommonModule } from '@angular/common';
+// import { ChartjsComponent } from './chartjs.component';
+// import { ChartjsRoutingModule } from './chartjs-routing.module';
+ import { NgChartsModule } from 'ng2-charts';
+ import { DatePipe } from '@angular/common';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,10 +48,11 @@ import { AcceuilComponent } from './acceuil/acceuil.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
+    NgChartsModule,
     // MatProgressSpinnerModule,
     // MatButtonModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
